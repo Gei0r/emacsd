@@ -7,3 +7,5 @@
 (define-key global-map (kbd "C-<down>") 'forward-sexp)
 (define-key global-map (kbd "C-<up>") 'backward-sexp)
 
+(define-key global-map (kbd "C-s") 'save-buffer)
+(define-key global-map (kbd "C-a") 'mark-whole-buffer)

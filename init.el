@@ -24,30 +24,50 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-save-default nil)
+ '(case-replace nil)
+ '(cua-auto-tabify-rectangles nil)
+ '(cua-keep-region-after-copy t)
+ '(electric-pair-mode t)
  '(fill-column 79)
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(initial-scratch-message nil)
+ '(make-backup-files nil)
+ '(menu-bar-mode nil)
+ '(mouse-wheel-progressive-speed nil)
+ '(mouse-wheel-scroll-amount (quote (4 ((shift) . 1) ((control)))))
  '(package-selected-packages
    (quote
-    (expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package))))
+    (magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+ '(sentence-end-double-space nil)
+ '(tab-width 4)
+ '(tool-bar-mode nil)
+ '(warning-suppress-types (quote ((undo discard-info)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :height 120 :width normal :foundry "outline" :family "Courier New"))))
+ '(bm-fringe-face ((t (:background "deep sky blue" :foreground "White"))))
+ '(column-marker-1 ((t (:background "#782121"))))
+ '(hl-line ((t (:background "dark slate gray"))))
+ '(idle-highlight ((t (:background "MediumPurple4")))))
 
 (setq-default cursor-type 'bar)
 (cua-mode)
-(setq cua-auto-tabify-rectangles nil) ;; Don't tabify after rectangle commands
 (transient-mark-mode 1) ;; No region when it is not highlighted
-(setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
-(setq mouse-wheel-scroll-amount '(4 ((shift) . 1) ((control) . nil)))
-(setq mouse-wheel-progressive-speed nil)
+
 ; Disable the stupid bell
 (defun my-bell-function ())
 (setq ring-bell-function 'my-bell-function)
 
+(define-key global-map (kbd "C-j") nil)
+
 (use-package naquadah-theme)
 (load-theme 'naquadah t)
+(global-hl-line-mode)
 
 (use-package ebed-progface :load-path "ebed")
 
@@ -64,11 +84,16 @@
     (setq ivy-wrap t)
     (setq ivy-height 20)
   :bind
-    (("C-b" . ivy-switch-buffer)))
+    (("C-b" . ivy-switch-buffer)
+	 (:map ivy-minibuffer-map ("TAB" . ivy-alt-done))))
 (ivy-mode 1)
 
 (use-package counsel
   :commands counsel-yank-pop counsel-M-x
+  :config
+    (setq ivy-initial-inputs-alist
+        (delq (assoc 'counsel-M-x ivy-initial-inputs-alist)
+              ivy-initial-inputs-alist))
   :bind
     (("C-o" . counsel-find-file)
 	 ("C-S-o" . counsel-git)
@@ -85,5 +110,31 @@
 (use-package expand-region
   :bind (("C-S-<up>" . er/expand-region)))
   
+(use-package eshell
+  :bind (("C-e" . eshell))
+  :config
+    (setq eshell-scroll-to-bottom-on-input 'all))
+(use-package ebed-eshell-here :load-path "ebed"
+  :bind (("C-S-e" . ebed:eshell-here)))
+
+(use-package bm 
+  :bind (("C-j n" . bm-next) ("C-j p" . bm-previous) ("C-j s" . bm-toggle))
+  :config (setq bm-highlight-style 'bm-highlight-only-fringe)
+  :custom-face (bm-fringe-face ((t (:background "deep sky blue" :foreground "White")))))
+
+(use-package ws-butler
+  :config (setq ws-butler-global-mode t))
+
+(use-package web-mode
+  :config
+    (setq web-mode-auto-close-style 2)
+	(setq web-mode-markup-indent-offset 2))
+
+(use-package ebed-helpers :load-path "ebed"
+  :commands ebed:revert-buffer-without-prompt)
+
+(use-package magit
+  :bind (("C-x v g" . magit-status)))
+
 (load-file "~/.emacs.d/mykeys.el")
 
