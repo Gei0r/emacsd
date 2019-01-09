@@ -19,6 +19,9 @@
 (eval-when-compile (require 'use-package))
 (setq use-package-always-ensure t)
 
+(use-package quelpa)
+(use-package quelpa-use-package)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -33,13 +36,14 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
+ '(isearch-allow-scroll t)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (4 ((shift) . 1) ((control)))))
  '(package-selected-packages
    (quote
-    (magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -58,6 +62,8 @@
 (setq-default cursor-type 'bar)
 (cua-mode)
 (transient-mark-mode 1) ;; No region when it is not highlighted
+(setq-default buffer-file-coding-system 'utf-8-unix)
+(global-auto-revert-mode)
 
 ; Disable the stupid bell
 (defun my-bell-function ())
@@ -68,12 +74,13 @@
 (use-package naquadah-theme)
 (load-theme 'naquadah t)
 (global-hl-line-mode)
+(show-paren-mode)
 
-(use-package ebed-progface :load-path "ebed")
-
-(use-package cc-mode)
-(add-hook 'c-mode-common-hook 'ebed:progface)
-(add-hook 'emacs-lisp-mode-hook 'ebed:progface)
+(use-package ebed-progface :load-path "ebed"
+  :commands ebed:progface
+  :hook ((web-mode . ebed:progface)
+         (c-mode-common . ebed:progface)
+		 (emacs-lisp-mode . ebed:progface)))
 
 (use-package bind-key)
 
@@ -125,16 +132,19 @@
 (use-package ws-butler
   :config (setq ws-butler-global-mode t))
 
-(use-package web-mode
-  :config
-    (setq web-mode-auto-close-style 2)
-	(setq web-mode-markup-indent-offset 2))
-
 (use-package ebed-helpers :load-path "ebed"
   :commands ebed:revert-buffer-without-prompt)
 
 (use-package magit
   :bind (("C-x v g" . magit-status)))
+
+(use-package undo-tree)
+(global-undo-tree-mode)
+
+(use-package comment-dwim-2
+  :bind (("M-," . comment-dwim-2)))
+
+(load-file "~/.emacs.d/languages.el")
 
 (load-file "~/.emacs.d/mykeys.el")
 

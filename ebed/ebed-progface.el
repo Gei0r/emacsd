@@ -28,7 +28,8 @@
 (use-package idle-highlight-mode)
 
 (use-package column-marker :load-path "ebed"
-  :commands column-marker-1)
+  :commands column-marker-1
+  :custom-face (column-marker-1 ((t (:background "#782121")))))
 
 ;; Use monospaced font faces in current buffer
 (defun ebed:progface ()
