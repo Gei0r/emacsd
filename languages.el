@@ -18,11 +18,8 @@
     (setq c-default-style "bsd" c-basic-offset 4)
     (add-to-list 'c-offsets-alist '(case-label . 4)))
 
-(setq use-package-verbose 'debug)
-(setq old-fnc use-package-ensure-function)
-(setq use-package-esnure-function 'quelpa)
 (use-package asm86-mode
-  :quelpa (asm86-mode :fetcher file :path "D:/Adrian/asm86-mode.el")
+  :quelpa (asm86-mode :fetcher github :repo "gei0r/asm86-mode")
   :mode "\\.asm"
   :config
   (setq asm86-blank-base-offset 4)
