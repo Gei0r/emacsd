@@ -85,6 +85,8 @@
 		 (emacs-lisp-mode . ebed:progface)))
 
 (use-package helm
+  :init
+  
   :bind*
   ("M-v" . helm-show-kill-ring)
   ("M-a" . helm-M-x)
@@ -96,6 +98,11 @@
   (setq helm-ff-skip-boring-files t)
   (setq helm-findutils-skip-boring-files t)
   (setq helm-recentf-fuzzy-match t)
+  (add-to-list 'display-buffer-alist
+               `(,(rx bos "*helm" (* not-newline) "*" eos)
+                 (display-buffer-in-side-window)
+                 (inhibit-same-window . t)
+                 (window-height . 0.4)))
   :bind
   (("C-b" . helm-mini)
    ("C-o" . helm-find-files)
@@ -105,7 +112,8 @@
          ("C-z" . helm-select-action)
          ("C-d" . helm-toggle-buffer-details))
    (:map helm--minor-mode-map
-         ("C-d" . helm-toggle-buffer-details))))
+         ("C-d" . helm-toggle-buffer-details))
+   (:map cua--cua-keys-keymap ("M-v" . helm-show-kill-ring))))
 (helm-mode 1)
 
 (use-package helm-ls-git :bind (("C-S-o" . helm-ls-git-ls)))
@@ -151,6 +159,17 @@
 (use-package avy :bind ("C-j w" . avy-goto-word-0))
 
 (use-package ace-window :bind ("C-j b" . ace-window))
+
+(use-package x4-smarter-beginning-of-line :load-path "ebed"
+  :bind ("<home>" . x4-smarter-beginning-of-line))
+
+(use-package ebed-misc :load-path "ebed"
+  :bind
+  ("<f4>" . ebed:find-other-file)
+  ("<S-return>" . ebed:newline-with-semicolon))
+
+(use-package ebed-clearcase :load-path "ebed"
+  :bind ("C-w" . ebed:cc-hijack-file-in-buffer))
 
 (load-file "~/.emacs.d/languages.el")
 
