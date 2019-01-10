@@ -42,10 +42,10 @@
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(mouse-wheel-progressive-speed nil)
- '(mouse-wheel-scroll-amount (quote (4 ((shift) . 1) ((control)))))
+ '(mouse-wheel-scroll-amount (quote (6 ((shift) . 1) ((control) . 0.5))))
  '(package-selected-packages
    (quote
-    (comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -84,39 +84,36 @@
          (c-mode-common . ebed:progface)
 		 (emacs-lisp-mode . ebed:progface)))
 
-(use-package bind-key)
-
-(use-package ivy
+(use-package helm
+  :bind*
+  ("M-v" . helm-show-kill-ring)
+  ("M-a" . helm-M-x)
   :config
-    (setq ivy-use-virtual-buffers t)
-    (setq enable-recursive-minibuffers t)
-    (setq ivy-wrap t)
-    (setq ivy-height 20)
-    (setq ivy-count-format "%d/%d ")
-    (setq ivy-re-builders-alist '((t   . ivy--regex-ignore-order)))
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-buffer-max-length nil)
+  (setq helm-buffers-fuzzy-matching t)
+  (setq helm-ff-file-name-history-use-recentf t)
+  (setq helm-ff-skip-boring-files t)
+  (setq helm-findutils-skip-boring-files t)
+  (setq helm-recentf-fuzzy-match t)
   :bind
-    (("C-b" . ivy-switch-buffer)
-	 (:map ivy-minibuffer-map ("TAB" . ivy-alt-done))))
-(ivy-mode 1)
+  (("C-b" . helm-mini)
+   ("C-o" . helm-find-files)
+   (:map helm-map
+         ("<tab>" . helm-execute-persistent-action)
+         ("C-i" . helm-execute-persistent-action)
+         ("C-z" . helm-select-action)
+         ("C-d" . helm-toggle-buffer-details))
+   (:map helm--minor-mode-map
+         ("C-d" . helm-toggle-buffer-details))))
+(helm-mode 1)
 
-(use-package counsel
-  :commands counsel-yank-pop counsel-M-x
-  :config
-    (setq ivy-initial-inputs-alist
-        (delq (assoc 'counsel-M-x ivy-initial-inputs-alist)
-              ivy-initial-inputs-alist))
-  :bind
-    (("C-o" . counsel-find-file)
-	 ("C-S-o" . counsel-git)
-	 ("M-v" . counsel-yank-pop))
-  :init
-    (bind-key* "M-v" 'counsel-yank-pop)
-	(define-key cua--cua-keys-keymap (kbd "M-v") 'counsel-yank-pop)
-	(bind-key* "M-a" 'counsel-M-x))
-(counsel-mode 1)
+(use-package helm-ls-git :bind (("C-S-o" . helm-ls-git-ls)))
 
-(use-package swiper
-  :bind (("C-f" . swiper)))
+(use-package helm-swoop :bind (("C-f" . helm-swoop)))
+
+(use-package ebed-helm-buffers-persistent-kill :load-path "ebed"
+  :bind (:map helm-map ("<f12>" . ebed:helm-buffers-persistent-kill)))
   
 (use-package expand-region
   :bind (("C-S-<up>" . er/expand-region)))
@@ -133,20 +130,27 @@
   :config (setq bm-highlight-style 'bm-highlight-only-fringe)
   :custom-face (bm-fringe-face ((t (:background "deep sky blue" :foreground "White")))))
 
-(use-package ws-butler
-  :config (setq ws-butler-global-mode t))
+(use-package ws-butler :config (setq ws-butler-global-mode t))
 
 (use-package ebed-helpers :load-path "ebed"
   :commands ebed:revert-buffer-without-prompt)
 
-(use-package magit
-  :bind (("C-x v g" . magit-status)))
+(use-package magit :bind (("C-x v g" . magit-status)))
 
 (use-package undo-tree)
 (global-undo-tree-mode)
 
-(use-package comment-dwim-2
-  :bind (("M-," . comment-dwim-2)))
+(use-package comment-dwim-2 :bind (("M-," . comment-dwim-2)))
+
+(use-package multiple-cursors
+  :init (global-unset-key (kbd "M-<down-mouse-1>"))
+  :bind
+  ("C-l" . mc/edit-lines)
+  ("M-<mouse-1>" . mc/add-cursor-on-click))
+
+(use-package avy :bind ("C-j w" . avy-goto-word-0))
+
+(use-package ace-window :bind ("C-j b" . ace-window))
 
 (load-file "~/.emacs.d/languages.el")
 
