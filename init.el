@@ -3,14 +3,16 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
-;; Only for Siemens!!
-;; (setq url-using-proxy nil)
-;; (setq url-proxy-services
-;;       '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-;;         ("http" . "127.0.0.1:3128")
-;;         ("https" . "127.0.0.1:3128")))
-;; (add-to-list 'package-archives
-;;       '("hs" . "g:/user/hs/emacs/packages"))
+(when (getenv "CLEARCASE_GROUPS") (setq isSiemens t))
+(when isSiemens
+  (setq url-using-proxy nil)
+  (setq url-proxy-services
+      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+        ("http" . "127.0.0.1:3128")
+        ("https" . "127.0.0.1:3128")))
+  (add-to-list 'package-archives
+      '("hs" . "g:/user/hs/emacs/packages")))
+
  
 ; install use-package
 (unless package-archive-contents (package-refresh-contents))
