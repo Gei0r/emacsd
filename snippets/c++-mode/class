@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: class
+# key: class
+# --
+/**
+* 
+*/
+class ${1:Name}
+{
+public:
+    /**
+	* @brief Constructor.
+	*/
+    ${1:$(yas/substr yas-text "[^: ]*")}();
+
+    ${2:virtual ~${1:$(yas/substr yas-text "[^: ]*")}();}
+
+private:
+    $0
+};

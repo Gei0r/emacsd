@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: term
+# key: t
+# --
+<term>${1:Term}</term>

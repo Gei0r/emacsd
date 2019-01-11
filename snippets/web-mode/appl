@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: appl
+# key: appl
+# --
+<entry path="../../../_inc/appl/${1:file}"/>

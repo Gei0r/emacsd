@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: new C++ header
+# key: new-head
+# --
+/**
+ * @file `(file-name-nondirectory buffer-file-name)`
+ *
+ * @author ebed Adrian Ebeling <adrian.ebeling@siemens.com>
+ *
+ * @rev
+ *
+ * ${1:Description}
+ *
+ * HISTORY
+ * @change `(format-time-string "%Y%m%d")` ebed: File created.
+ *
+ * Copyright (C) Siemens AG, `(format-time-string "%Y")` All Rights Reserved
+ */
+
+#ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H}
+#define $1
+
+#pragma ident "<@(#) >"
+
+#include <system32.h>
+
+$0
+
+#endif /* $1 */

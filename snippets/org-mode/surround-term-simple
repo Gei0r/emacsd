@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: surround-term-simple
+# binding: C-t s
+# expand-env : ((yas-wrap-around-region 1))
+# --
+<term>$0</term>

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: docOverview_Testfiles
+# key: dot
+# --
+<docOverview_test rt="../${1:dir}">
+  <testfiles>
+    $0
+  </testfiles>
+</docOverview_test>

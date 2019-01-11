@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: devl
+# key: devl
+# --
+<entry path="../../../_inc/devl/${1:file}"/>

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: testcase
+# key: test
+# --
+/**
+ *
+ */
+INT32 far ${1:name}()
+{
+    EXPORT_TESTER($1,
+                  "${2:path}|$1");
+
+    $0
+
+    return eOK;
+};

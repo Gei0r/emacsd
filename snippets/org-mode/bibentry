@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: bibentry
+# key: e
+# --
+<entry id="${1:id}">${2:name}</entry>

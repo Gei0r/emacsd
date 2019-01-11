@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: include statement
+# key: inc
+# --
+$INCLUDE (../_src/$1_h.asm)

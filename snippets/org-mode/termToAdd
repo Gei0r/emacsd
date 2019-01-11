@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: termToAdd
+# key: ta
+# --
+<termToAdd>${1:term}</termToAdd>

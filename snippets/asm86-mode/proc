@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: new private function implementation
+# key: proc
+# --
+${1:func_name} PROC NEAR
+        $2
+        ret
+$1 ENDP

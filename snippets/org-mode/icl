@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: icl
+# key: icl
+# --
+<icode>&lt;$1&gt;</icode>

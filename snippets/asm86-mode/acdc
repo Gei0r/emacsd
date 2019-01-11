@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Corridor ACDC
+# key: acdc
+# --
+;; Corridor ACDC
+mov   eax, 255
+mov   edx, 255
+db 0xfe, 0x38, 127, 0x00

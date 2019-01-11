@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: abbr
+# key: a
+# --
+<abbr>$1</abbr>

@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: new-head
+# key: new-head
+# --
+
+;;; @file `(file-name-nondirectory buffer-file-name)`
+;;;
+;;; @author ebed Adrian Ebeling <adrian.ebeling@siemens.com> +49 531 226 2841
+;;;
+;;; @rev
+;;;
+;;; @ver
+;;;
+;;; ${1:Description}
+;;;
+;;; HISTORY
+;;; @change `(format-time-string "%Y%m%d")` ebed: File created.
+;;;
+;;; Copyright (C) Siemens AG, 2017 All Rights Reserved
+
+;;; extrn x : near
+
+;;;Structure
+;;;StrucName STRUC
+;;;  A DD ?
+;;;StrucName ENDS
+
+;;;DATA SEGMENT para PUBLIC use32 rw
+;;;    EXTRN var1:              BYTE/WORD/DWORD
+;;;DATA ENDS
+
+CODE32  SEGMENT PUBLIC USE32 ER
+    ;; what-String geht als Signatur in den Code mit ein:
+    DB '@(#) >'
+CODE32  ENDS
+

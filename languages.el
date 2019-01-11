@@ -1,5 +1,7 @@
 
 (use-package org
+  :bind
+  ((:map org-mode-map (("C-j" . nil) ("C-k" . nil))))
   :config
   (setq org-blank-before-new-entry
         (quote ((heading . t) (plain-list-item))))

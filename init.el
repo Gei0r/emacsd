@@ -47,7 +47,7 @@
  '(mouse-wheel-scroll-amount (quote (6 ((shift) . 1) ((control) . 0.5))))
  '(package-selected-packages
    (quote
-    (ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -101,7 +101,7 @@
   (setq helm-findutils-skip-boring-files t)
   (setq helm-recentf-fuzzy-match t)
   (add-to-list 'display-buffer-alist
-               `(,(rx bos "*helm" (* not-newline) "*" eos)
+               `("^\*\\(H\\|h\\)elm.*\*\$"
                  (display-buffer-in-side-window)
                  (inhibit-same-window . t)
                  (window-height . 0.4)))
@@ -120,10 +120,16 @@
 
 (use-package helm-ls-git :bind (("C-S-o" . helm-ls-git-ls)))
 
-(use-package helm-swoop :bind (("C-f" . helm-swoop)))
+(use-package helm-swoop :bind (("C-f" . helm-swoop-without-pre-input))
+  :config
+  (setq helm-swoop-split-window-function 'helm-default-display-buffer))
 
 (use-package ebed-helm-buffers-persistent-kill :load-path "ebed"
   :bind (:map helm-map ("<f12>" . ebed:helm-buffers-persistent-kill)))
+
+(use-package ergoemacs-helm-ff-backspace :load-path "ebed"
+  :bind ((:map helm-find-files-map ("DEL" . ergoemacs-helm-ff-backspace))
+         (:map helm-read-file-map  ("DEL" . ergoemacs-helm-ff-backspace))))
   
 (use-package expand-region
   :bind (("C-S-<up>" . er/expand-region)))
@@ -172,6 +178,36 @@
 
 (use-package ebed-clearcase :load-path "ebed"
   :bind ("C-w" . ebed:cc-hijack-file-in-buffer))
+
+(use-package flycheck
+  :hook ((c++-mode c-mode) . flycheck-mode)
+  :config
+  (push 'c/c++-clang flycheck-disabled-checkers)
+  (push 'c/c++-gcc   flycheck-disabled-checkers))
+
+(use-package yasnippet
+  :config
+  (setq yas-indent-line 'fixed)
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (yas-reload-all)
+  :hook ((prog-mode org-mode) . yas-minor-mode)
+  :bind ((:map yas-keymap
+               ("RET" . yas-next-field)
+               ("<tab>" . yas-next-field))))
+
+(use-package flyspell
+  :hook ((org-mode) . (lambda() (flyspell-mode)(flyspell-buffer)))
+  :init
+  (setq ispell-program-name "hunspell")
+  (setq ispell-local-dictionary "de_DE")
+  (setq ispell-local-dictionary-alist
+        '(("de_DE" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8))))
+
+(use-package flyspell-correct-helm
+  :demand
+  :bind (:map flyspell-mode-map ("C-," . flyspell-correct-wrapper))
+  :init
+  (setq flyspell-correct-interface #'flyspell-correct-helm))
 
 (load-file "~/.emacs.d/languages.el")
 

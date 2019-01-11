@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: docOverview
+# key: do
+# --
+<docOverview_srcFiles rt="../${1:rt}/_src" checked_by="VAL_SW">
+  $0
+</docOverview_srcFiles>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: xml-tags
+# key: lt
+# --
+&lt;$1&gt;
