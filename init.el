@@ -3,7 +3,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
-(when (getenv "CLEARCASE_GROUPS") (setq isSiemens t))
+(if (getenv "CLEARCASE_GROUPS") (setq isSiemens t) (setq isSiemens nil))
 (when isSiemens
   (setq url-using-proxy nil)
   (setq url-proxy-services
@@ -47,7 +47,7 @@
  '(mouse-wheel-scroll-amount (quote (6 ((shift) . 1) ((control) . 0.5))))
  '(package-selected-packages
    (quote
-    (flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -84,7 +84,8 @@
   :commands ebed:progface
   :hook ((web-mode . ebed:progface)
          (c-mode-common . ebed:progface)
-		 (emacs-lisp-mode . ebed:progface)))
+		 (emacs-lisp-mode . ebed:progface)
+         (typescript-mode . ebed:progface)))
 
 (use-package helm
   :init
@@ -156,7 +157,7 @@
 (use-package undo-tree)
 (global-undo-tree-mode)
 
-(use-package comment-dwim-2 :bind (("M-," . comment-dwim-2)))
+(use-package comment-dwim-2 :bind* (("M-," . comment-dwim-2)))
 
 (use-package multiple-cursors
   :init (global-unset-key (kbd "M-<down-mouse-1>"))
@@ -180,10 +181,18 @@
   :bind ("C-w" . ebed:cc-hijack-file-in-buffer))
 
 (use-package flycheck
-  :hook ((c++-mode c-mode) . flycheck-mode)
+  :hook ((c++-mode c-mode) . (lambda () (flycheck-mode)
+                               (push 'c/c++-clang flycheck-disabled-checkers)
+                               (push 'c/c++-gcc   flycheck-disabled-checkers))))
+
+(use-package company
+  :bind (("C-SPC" . company-complete))
+  :hook (after-init-hook . global-company-mode)
   :config
-  (push 'c/c++-clang flycheck-disabled-checkers)
-  (push 'c/c++-gcc   flycheck-disabled-checkers))
+  (setq company-idle-delay nil)
+  (setq company-show-numbers t)
+  (delete 'company-clang company-backends)
+  (delete 'company-semantic company-backends))
 
 (use-package yasnippet
   :config

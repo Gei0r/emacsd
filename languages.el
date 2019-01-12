@@ -23,6 +23,13 @@
 (use-package asm86-mode
   :quelpa (asm86-mode :fetcher github :repo "gei0r/asm86-mode")
   :mode "\\.asm"
+  :bind
+  ((:map asm86-mode-map
+         (("RET" . (lambda ()
+                     (interactive)
+                     (if (looking-back ";;.*")
+                         (progn (indent-new-comment-line)(insert " "))
+                       (newline-and-indent)))))))
   :config
   (setq asm86-blank-base-offset 4)
   (setq asm86-code-comment-base-offset 4)
@@ -43,3 +50,23 @@
   (setq asm86-tab-func-offset 4)
   (setq asm86-variable-base-offset 4)
   (setq asm86-variable-func-offset 8))
+
+(use-package typescript-mode
+  :mode("\\.ts" "\\.tsx"))
+
+(use-package tide
+  :hook
+  (typescript-mode .
+    (lambda()
+      (tide-setup)
+      (flycheck-mode +1)
+      (setq flycheck-check-syntax-automatically '(save mode-enabled))
+      (eldoc-mode +1)
+      (tide-hl-identifier-mode +1)
+      (company-mode +1)))
+  :config
+  (setq company-tooltip-align-annotations t)
+  (add-hook 'before-save-hook 'tide-format-before-save)
+  :bind
+  ((:map tide-mode-map (("<f2>" . tide-jump-to-definition)
+                        ("M-<left>" . tide-jump-back)))))
