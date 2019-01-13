@@ -16,6 +16,8 @@
 	(setq web-mode-markup-indent-offset 2))
 
 (use-package cc-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
   :config
     (setq c-default-style "bsd" c-basic-offset 4)
     (add-to-list 'c-offsets-alist '(case-label . 4)))
@@ -70,3 +72,11 @@
   :bind
   ((:map tide-mode-map (("<f2>" . tide-jump-to-definition)
                         ("M-<left>" . tide-jump-back)))))
+
+(use-package lsp-mode :commands lsp :config (setq lsp-prefer-flymake nil))
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
+
+(use-package ccls
+  :hook ((c-mode c++-mode objc-mode) . (lambda () (require 'ccls) (lsp)))
+  :config (setq ccls-executable "D:/Adrian/ccls/ccls/build/ccls.exe"))
