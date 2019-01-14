@@ -77,6 +77,10 @@
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package company-lsp :commands company-lsp)
 
+(use-package bibtex
+  :config
+  (define-key bibtex-mode-map (kbd "C-j") nil))
+
 (use-package ccls
   :hook ((c-mode c++-mode objc-mode) . (lambda () (require 'ccls) (lsp)))
   :config (setq ccls-executable "D:/Adrian/ccls/ccls/build/ccls.exe"))

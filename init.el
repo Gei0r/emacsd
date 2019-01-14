@@ -136,6 +136,15 @@
   :commands load-dir-settings
   :hook (find-file . load-dir-settings))
 
+(use-package ebed-compile :load-path "ebed"
+  :bind
+  (("<f5>" . (lambda() (interactive) (ebed:compile-binding 0))))
+  (("<f6>" . (lambda() (interactive) (ebed:compile-binding 1))))
+  (("<f7>" . (lambda() (interactive) (ebed:compile-binding 2))))
+  (("<f8>" . (lambda() (interactive) (ebed:compile-binding 3))))
+  (("<f9>" . (lambda() (interactive) (ebed:compile-binding 4))))
+  (("<f10>" . (lambda() (interactive) (ebed:compile-binding 5)))))
+
 (use-package expand-region
   :bind (("C-S-<up>" . er/expand-region)))
   
@@ -221,6 +230,10 @@
   :bind (:map flyspell-mode-map ("C-," . flyspell-correct-wrapper))
   :init
   (setq flyspell-correct-interface #'flyspell-correct-helm))
+
+(use-package ebed-bib :load-path "ebed"
+  :bind* ("C-x i" . ebed:getBibentryAtPoint)
+  :config (setq ebed:bibDatabase "D:/User/Adrian/Literaturdatenbank"))
 
 (load-file "~/.emacs.d/languages.el")
 

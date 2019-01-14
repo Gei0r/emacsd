@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: a_req
+# key: ar
+# --
+<a_req href="$1"/>
