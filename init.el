@@ -47,7 +47,7 @@
  '(mouse-wheel-scroll-amount (quote (6 ((shift) . 1) ((control) . 0.5))))
  '(package-selected-packages
    (quote
-    (ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -131,7 +131,11 @@
 (use-package ergoemacs-helm-ff-backspace :load-path "ebed"
   :bind ((:map helm-find-files-map ("DEL" . ergoemacs-helm-ff-backspace))
          (:map helm-read-file-map  ("DEL" . ergoemacs-helm-ff-backspace))))
-  
+
+(use-package ebed-load-dir-settings :load-path "ebed"
+  :commands load-dir-settings
+  :hook (find-file . load-dir-settings))
+
 (use-package expand-region
   :bind (("C-S-<up>" . er/expand-region)))
   
