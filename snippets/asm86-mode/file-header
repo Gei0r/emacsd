@@ -16,4 +16,4 @@
 ;;; HISTORY
 ;;; @change `(format-time-string "%Y%m%d")` ebed: File created.
 ;;;
-;;; Copyright (C) Siemens AG, 2017 All Rights Reserved
+;;; Copyright (C) Siemens Mobility GmbH, `(format-time-string "%Y")` All Rights Reserved
