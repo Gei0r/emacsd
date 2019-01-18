@@ -74,8 +74,10 @@
   ((:map tide-mode-map (("<f2>" . tide-jump-to-definition)
                         ("M-<left>" . tide-jump-back)))))
 
-(use-package lsp-mode :commands lsp :config (setq lsp-prefer-flymake nil))
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-mode
+  :commands lsp :config (setq lsp-prefer-flymake nil))
+(use-package lsp-ui
+  :commands lsp-ui-mode)
 (use-package company-lsp :commands company-lsp)
 
 (use-package bibtex

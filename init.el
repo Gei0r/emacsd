@@ -218,11 +218,6 @@
                ("RET" . yas-next-field)
                ("<tab>" . yas-next-field))))
 
-(use-package flyspell-correct-helm
-  :demand
-  :bind (:map flyspell-mode-map ("C-," . flyspell-correct-wrapper))
-  :init
-  (setq flyspell-correct-interface #'flyspell-correct-helm))
 
 (use-package ebed-bib :load-path "ebed"
   :bind* ("C-x i" . ebed:getBibentryAtPoint)
