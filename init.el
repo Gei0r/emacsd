@@ -67,6 +67,7 @@
 (cua-mode)
 (transient-mark-mode 1) ;; No region when it is not highlighted
 (setq-default buffer-file-coding-system 'utf-8-unix)
+(set-language-environment "UTF-8")
 (global-auto-revert-mode)
 
 ; Disable the stupid bell
@@ -216,14 +217,6 @@
   :bind ((:map yas-keymap
                ("RET" . yas-next-field)
                ("<tab>" . yas-next-field))))
-
-(use-package flyspell
-  :hook ((org-mode) . (lambda() (flyspell-mode)(flyspell-buffer)))
-  :init
-  (setq ispell-program-name "hunspell")
-  (setq ispell-local-dictionary "de_DE")
-  (setq ispell-local-dictionary-alist
-        '(("de_DE" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8))))
 
 (use-package flyspell-correct-helm
   :demand

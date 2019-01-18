@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: asv
+# key: asv
+# --
+  <version v="${2:v}" kmv="${1:kmv}" sig="${3:sig}" diff="${4:diff}"/>

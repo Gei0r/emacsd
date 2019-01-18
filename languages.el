@@ -7,7 +7,8 @@
         (quote ((heading . t) (plain-list-item))))
   (setq org-startup-folded 'content)
   (setq org-startup-indented t)
-  (setq org-support-shift-select 'always))
+  (setq org-support-shift-select 'always)
+  (auto-fill-mode 1))
 
 (use-package web-mode
   :mode ("\\.js" "\\.jsx" "\\.xml" "\\.html")

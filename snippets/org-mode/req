@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: req
+# key: req
+# --
+<req tag="${1:tag}">
+  <title>${2:title}</title>
+  <descr>
+    ${3:Description}
+  </descr>
+  <category>Funktion</category>
+  <priority>mandatory</priority>
+  <stability>stabil</stability>
+  <references>CFX12312312</references>
+  <quer></quer>
+  <testhinweise></testhinweise>
+  <version></version>  
+  <history></history>
+  <newIn></newIn>
+  <changedIn></changedIn>
+</req>

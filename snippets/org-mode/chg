@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: chg
+# key: chg
+# --
+<change v="${1:v}" km="${2:km}" date="${3:date}" author="${4:author}"/>
