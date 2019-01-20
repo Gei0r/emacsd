@@ -35,7 +35,10 @@
 (defun ebed:progface ()
    "Sets fonts and other visual stuff for programming buffers"
    (interactive)
-   (setq buffer-face-mode-face '(:family "Consolas" :height 140))
+   (if (eq system-type 'windows-nt)
+       (setq buffer-face-mode-face '(:family "Consolas" :height 140))
+     (setq buffer-face-mode-face '(:family "Inconsolata" :height 160)))
+   
    (buffer-face-mode)
    (column-marker-1 79)
    (show-paren-mode)
