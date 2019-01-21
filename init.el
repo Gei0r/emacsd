@@ -57,11 +57,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :height 120 :width normal :foundry "outline" :family "Courier New"))))
  '(bm-fringe-face ((t (:background "deep sky blue" :foreground "White"))))
  '(column-marker-1 ((t (:background "#782121"))))
  '(hl-line ((t (:background "dark slate gray"))))
  '(idle-highlight ((t (:background "MediumPurple4")))))
+
+(if (eq system-type 'windows-nt)
+    (face-spec-set 'default '((t :height 120 :family "Courier New")))
+  (face-spec-set 'default '((t :height 120 :family "DejaVu Sans Mono"))))
 
 (setq-default cursor-type 'bar)
 (cua-mode)
@@ -187,6 +190,7 @@
   :bind ("<home>" . x4-smarter-beginning-of-line))
 
 (use-package ebed-misc :load-path "ebed"
+  :commands (ebed:insert-path)
   :bind
   ("<f4>" . ebed:find-other-file)
   ("<S-return>" . ebed:newline-with-semicolon))

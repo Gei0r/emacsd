@@ -82,5 +82,12 @@
         (message "No other file found")
         nil))))
 
+(defun ebed:insert-path()
+  (interactive)
+  (let ((to-paste (current-kill 0 t)))
+    (setq to-paste (replace-regexp-in-string "\\\\" "/" to-paste))
+    (insert to-paste)))
+
+
 (provide 'ebed-misc)
 ;;; ebed-misc.el ends here

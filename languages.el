@@ -10,6 +10,8 @@
   (setq org-support-shift-select 'always)
   (auto-fill-mode 1))
 
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
+
 (use-package web-mode
   :mode ("\\.js" "\\.jsx" "\\.xml" "\\.html")
   :config
@@ -77,7 +79,9 @@
 (use-package lsp-mode
   :commands lsp :config (setq lsp-prefer-flymake nil))
 (use-package lsp-ui
-  :commands lsp-ui-mode)
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-sideline-enable nil))
 (use-package company-lsp :commands company-lsp)
 
 (use-package bibtex
@@ -86,4 +90,9 @@
 
 (use-package ccls
   :hook ((c-mode c++-mode objc-mode) . (lambda () (require 'ccls) (lsp)))
-  :config (setq ccls-executable "D:/Adrian/ccls/ccls/build/ccls.exe"))
+  :config
+  (setq ccls-executable "D:/Adrian/ccls/ccls/build/ccls.exe")
+  (setq ccls-args (list "--log-file=D:/temp/loggi.txt" "-v=1"))
+  (setq ccls-initialization-options
+        '(:compilationDatabaseCommand
+          "node D:/Adrian/cquery-Hackbrett/src/justLog.js")))
