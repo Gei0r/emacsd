@@ -81,7 +81,10 @@
 (use-package lsp-ui
   :commands lsp-ui-mode
   :config
-  (setq lsp-ui-sideline-enable nil))
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-doc-render-function
+      (lambda(str) (s-trim (replace-regexp-in-string "" "" str))))
+  (setq lsp-ui-doc-include-signature t))
 (use-package company-lsp :commands company-lsp)
 
 (use-package bibtex
@@ -89,9 +92,10 @@
   (define-key bibtex-mode-map (kbd "C-j") nil))
 
 (use-package ccls
-  :hook ((c-mode c++-mode objc-mode) . (lambda () (require 'ccls) (lsp)))
+  :defer t
   :config
   (setq ccls-args (list "--log-file=D:/temp/loggi.txt" "-v=1"))
-  (setq ccls-initialization-options
-        '(:compilationDatabaseCommand
-          "node D:/Adrian/cquery-Hackbrett/src/justLog.js")))
+  (setq ccls-sem-highlight-method 'font-lock))
+
+(use-package ebed-ccls-config :load-path "lspConfig"
+  :hook ((c-mode c++-mode) . ebed:ccls-config-init))

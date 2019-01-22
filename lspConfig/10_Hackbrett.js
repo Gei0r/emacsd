@@ -42,6 +42,7 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 "NEAR": ""
             },
             flags: [
+                "-Wall",
                 "-Wno-microsoft-cast"
             ],
             root: (_unused, file) => locateDominatingFile(file, "_make")
@@ -98,7 +99,7 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         let cppFiles =
             getFilesInDirRecursive(rootDir,
-                d => d !== ".ccls" && d !== "_scratch",
+                d => d !== ".ccls-cache" && d !== "_scratch",
                 f => f.endsWith(".cpp"));
 
         return cppFiles.map(cppFile =>
@@ -154,6 +155,7 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
         //     fs.writeSync(logfile, "\n");
         // }
 
+        if (resolvedConfig.root === undefined) resolvedConfig.root = "";
         return resolvedConfig;
     }
 

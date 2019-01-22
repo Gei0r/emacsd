@@ -128,7 +128,7 @@ function locateDominatingFile(file, name) {
     }
 
     // not found, check parent directory
-    let parent = path.resolve(file + "/..");
+    let parent = path.resolve(file + "/..").replace(/\\/g, "/");
     if (parent == file) {
         // reached root, not found
         return undefined;
