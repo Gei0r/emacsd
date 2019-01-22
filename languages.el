@@ -91,7 +91,6 @@
 (use-package ccls
   :hook ((c-mode c++-mode objc-mode) . (lambda () (require 'ccls) (lsp)))
   :config
-  (setq ccls-executable "D:/Adrian/ccls/ccls/build/ccls.exe")
   (setq ccls-args (list "--log-file=D:/temp/loggi.txt" "-v=1"))
   (setq ccls-initialization-options
         '(:compilationDatabaseCommand
