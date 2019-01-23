@@ -65,7 +65,6 @@ Program is set in ``ebed:ccls-config-program'', which see.
 
 Meant to be used as a hook on c-mode and c++-mode."
 
-  (message "~~~~~~~~~ ebed:ccls-config-init")
   (advice-add 'lsp--find-root-interactively :before-until
               'ebed:find-ccls-project-root)
   (require 'ccls)

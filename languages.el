@@ -77,13 +77,20 @@
                         ("M-<left>" . tide-jump-back)))))
 
 (use-package lsp-mode
-  :commands lsp :config (setq lsp-prefer-flymake nil))
+  :commands lsp :config (setq lsp-prefer-flymake nil)
+  :bind
+  ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
+                       ("M-<left>" . xref-pop-marker-stack)))))
 (use-package lsp-ui
   :commands lsp-ui-mode
   :config
   (setq lsp-ui-sideline-enable nil)
   (setq lsp-ui-doc-render-function
-      (lambda(str) (s-trim (replace-regexp-in-string "" "" str))))
+        (lambda(str)
+          (s-trim
+           (replace-regexp-in-string
+            "" ""
+            (decode-coding-string str 'latin-1)))))
   (setq lsp-ui-doc-include-signature t))
 (use-package company-lsp :commands company-lsp)
 
@@ -95,7 +102,8 @@
   :defer t
   :config
   (setq ccls-args (list "--log-file=D:/temp/loggi.txt" "-v=1"))
-  (setq ccls-sem-highlight-method 'font-lock))
+  (setq ccls-sem-highlight-method 'font-lock)
+  (idle-highlight-mode -1))
 
 (use-package ebed-ccls-config :load-path "lspConfig"
   :hook ((c-mode c++-mode) . ebed:ccls-config-init))

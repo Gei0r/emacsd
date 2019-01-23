@@ -59,6 +59,7 @@
  ;; If there is more than one, they won't work right.
  '(bm-fringe-face ((t (:background "deep sky blue" :foreground "White"))))
  '(column-marker-1 ((t (:background "#782121"))))
+ '(highlight ((t (:background "dark slate blue" :foreground "ivory"))))
  '(hl-line ((t (:background "dark slate gray"))))
  '(idle-highlight ((t (:background "MediumPurple4")))))
 
