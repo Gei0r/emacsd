@@ -81,9 +81,9 @@ async function main() {
                     path.resolve(process.argv[2]).replace(/\\/g, "/");
                 let result = await plugin.getCCJson(projDir, logfile);
                 if (result !== undefined) {
-                    fs.writeSync(logfile,
-                        `result: ${JSON.stringify(result, null, 2)}`);
-                    console.log(result);
+                    const resultJson = JSON.stringify(result, null, 2);
+                    fs.writeSync(logfile, `result: ${resultJson}`);
+                    process.stdout.write(resultJson);
                     break;
                 }
             }
