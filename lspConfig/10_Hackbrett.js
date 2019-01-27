@@ -29,35 +29,23 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
        bekommt den alten Wert übergeben und muss den neuen Wert zurückgeben.
     */
     const config = {
+        "Hackbrett/_inc": {root: "Hackbrett/_inc"},
         "Hackbrett/_section": {
-            incdirs: [
-                "Hackbrett/_inc",
-                "Hackbrett/_inc/appl",
-                "Hackbrett/_inc/devl"
-            ],
-            defines: {
-                "far": "",
-                "FAR": "",
-                "near": "",
-                "NEAR": ""
-            },
-            flags: [
-                "-Wall",
-                "-Wno-microsoft-cast"
-            ],
-            root: (_unused, file) => locateDominatingFile(file, "_make")
+            incdirs: ["Hackbrett/_inc", "Hackbrett/_inc/appl",
+                      "Hackbrett/_inc/devl"],
+            defines: {"far": "", "FAR": "", "near": "", "NEAR": ""},
+            flags: ["-Wall", "-Wno-microsoft-cast",
+                    "-nostdinc++", "-nostdinc"],
+            root: (_unused, file) =>
+                path.parse(locateDominatingFile(file, "_make")).dir
         },
 
         "Hackbrett/_section/devices/file/_test_src": {
-            defines: {
-                "TESTRUNNER_NO_STL": "1"
-            }
+            defines: {"TESTRUNNER_NO_STL": "1"}
         },
 
         "Hackbrett/_section/kernel32": {
-            incdirs: [
-                "Hackbrett/_section/kernel32/_inc"
-            ],
+            incdirs: ["Hackbrett/_section/kernel32/_inc"],
             root: "Hackbrett/_section/kernel32"
         },
 
@@ -70,9 +58,7 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
         },
 
         "Hackbrett/_section/devices/file": {
-            defines: {
-                "THROW_NOTHING": "throw"
-            }
+            defines: {"THROW_NOTHING": "throw"}
         }
     };
 
@@ -87,7 +73,8 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         let config = loadConfig(hackbrett, filename, logfile);
 
-        return `${config.CCRoot}/${config.root}`;
+        fs.writeSync(logfile, `--get-root returning ${config.root}`);
+        return config.root;
 
     }
 
@@ -156,6 +143,11 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
         // }
 
         if (resolvedConfig.root === undefined) resolvedConfig.root = "";
+        if (!path.isAbsolute(resolvedConfig.root)) {
+            resolvedConfig.root =
+                path.resolve(`${resolvedConfig.CCRoot}/${resolvedConfig.root}`)
+                    .replace(/\\/g, "/");
+        }
         return resolvedConfig;
     }
 
