@@ -13,7 +13,7 @@
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
 (use-package web-mode
-  :mode ("\\.js" "\\.jsx" "\\.xml" "\\.html")
+  :mode ("\\.jsx" "\\.xml" "\\.html")
   :config
     (setq web-mode-auto-close-style 2)
 	(setq web-mode-markup-indent-offset 2))
@@ -58,7 +58,7 @@
                                            (newline-and-indent)))))))
 
 (use-package typescript-mode
-  :mode("\\.ts" "\\.tsx"))
+  :mode("\\.ts" "\\.tsx" "\\.js"))
 
 (use-package tide
   :hook
