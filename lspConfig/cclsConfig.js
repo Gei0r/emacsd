@@ -41,9 +41,10 @@ const fs = require('fs');
 const path = require('path');
 
 async function main() {
+    let logfile = undefined;
     try {
         // open logfile
-        let logfile = fs.openSync("D:/temp/lspConfig.log", 'a');
+        logfile = fs.openSync("D:/temp/lspConfig.log", 'a');
         fs.writeSync(logfile, '\n\n----------------------------\n');
         fs.writeSync(logfile, `argv: ${JSON.stringify(process.argv)}\n`);
         fs.writeSync(logfile, `cwd: ${process.cwd()}\n`);
@@ -73,6 +74,7 @@ async function main() {
             if (getRoot) {
                 let result = await plugin.getRoot(process.argv[3], logfile);
                 if (result !== undefined) {
+                    fs.writeSync(logfile, `get-root result: ${result}`);
                     console.log(result);
                     break;
                 }
@@ -90,6 +92,9 @@ async function main() {
         }
     } catch (e) {
         process.stderr.write(e.stack);
+        if (logfile !== undefined) {
+            fs.writeSync(logfile, e.stack);
+        }
     }
 }
 
