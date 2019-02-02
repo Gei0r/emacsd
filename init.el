@@ -47,7 +47,7 @@
  '(mouse-wheel-scroll-amount (quote (6 ((shift) . 1) ((control) . 0.5))))
  '(package-selected-packages
    (quote
-    (lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -227,6 +227,20 @@
 (use-package ebed-bib :load-path "ebed"
   :bind* ("C-x i" . ebed:getBibentryAtPoint)
   :config (setq ebed:bibDatabase "D:/User/Adrian/Literaturdatenbank"))
+
+(use-package git-gutter+
+  :demand
+  :config
+  (global-git-gutter+-mode)
+  (set-face-foreground 'git-gutter+-added "#008000")
+  (set-face-foreground 'git-gutter+-deleted "#9f0000")
+  (set-face-foreground 'git-gutter+-modified "#9f9f00")
+  (setq git-gutter+-lighter " GG")
+  :bind ((:map git-gutter+-mode-map
+               (("C-j h" . git-gutter+-next-hunk)
+                ("C-j H" . git-gutter+-previous-hunk)
+                ("C-x v r" . git-gutter+-revert-hunks)
+                ("C-x v s" . git-gutter+-stage-hunks)))))
 
 (load-file "~/.emacs.d/languages.el")
 
