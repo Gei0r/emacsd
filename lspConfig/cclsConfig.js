@@ -143,9 +143,19 @@ function locateDominatingFile(file, name) {
     return locateDominatingFile(parent, name);
 }
 
+/**
+   Recursively gets all the files in the directory
+
+   @param dir: string Starting directory
+   @param dirPred : (filename, fullpath) => bool (optional)
+          Directories are only entered if dirPred returns true
+   @param filePred : (filename, fullpath) => bool (optional)
+          Files are only returned if filePred returns true
+   @return Array of filenames (full paths)
+*/
 function readFilesInDirRecursive(dir, dirPred, filePred) {
-    if (dirPred === undefined) dirPred = _d => true;
-    if (filePred === undefined) filePred = _f => true;
+    if (dirPred === undefined) dirPred = () => true;
+    if (filePred === undefined) filePred = () => true;
 
     dir = path.resolve(dir).replace(/\\/g, "/");
 
@@ -153,11 +163,12 @@ function readFilesInDirRecursive(dir, dirPred, filePred) {
     let ret = [];
 
     for (let file of files) {
-        if (file.isDirectory() && dirPred(file.name)) {
+        let fullFileName = `${dir}/${file.name}`;
+        if (file.isDirectory() && dirPred(file.name, fullFileName)) {
             // recursive call
             ret.push(...readFilesInDirRecursive(`${dir}/${file.name}`,
                 dirPred, filePred));
-        } else if (file.isFile() && filePred(file.name)) {
+        } else if (file.isFile() && filePred(file.name, fullFileName)) {
             ret.push(`${dir}/${file.name}`);
         }
     }

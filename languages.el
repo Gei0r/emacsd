@@ -77,7 +77,10 @@
                         ("M-<left>" . tide-jump-back)))))
 
 (use-package lsp-mode
-  :commands lsp :config (setq lsp-prefer-flymake nil)
+  :commands lsp
+  :config
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-auto-require-clients nil)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack)))))
