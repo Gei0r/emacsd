@@ -17,9 +17,17 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
     function makeLibraryIncludeDirs(libdir) {
         let ret = [];
 
-        for (let dir of (fs.readdirSync(libdir, { withFileTypes: true })
-            .filter(e => e.isDirectory())
-            .map(d => d.name))) {
+        let dirs = [];
+        try {
+            dirs = fs.readdirSync(libdir, { withFileTypes: true })
+                .filter(e => e.isDirectory())
+                .map(d => d.name);
+        } catch (e) {
+            // ignore non-existing dir
+            return ret;
+        }
+
+        for (let dir of dirs) {
             let thisLibDir = `${libdir}/${dir}`;
             ret.push(thisLibDir);
 

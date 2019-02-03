@@ -118,7 +118,13 @@ function locateDominatingFile(file, name) {
 
     if (file === undefined) file = process.cwd();
     file = path.resolve(file).replace(/\\/g, "/");
-    if (fs.statSync(file).isFile()) {
+
+    let isDir = false;
+    try {
+        isDir = fs.statSync(file).isDirectory();
+    } catch (e) { /* doesn't exist --> not a dir either */ }
+
+    if (!isDir) {
         // start at the file's parent directory instead
         file = path.parse(file).dir;
     }
