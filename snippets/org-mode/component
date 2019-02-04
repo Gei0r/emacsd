@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: component
+# binding: C-t c
+# key: c
+# expand-env : ((yas-wrap-around-region 1))
+# --
+<comp>$0</comp>

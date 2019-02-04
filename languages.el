@@ -8,7 +8,8 @@
   (setq org-startup-folded 'content)
   (setq org-startup-indented t)
   (setq org-support-shift-select 'always)
-  (auto-fill-mode 1))
+  (auto-fill-mode 1)
+  (column-number-mode 1))
 
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
