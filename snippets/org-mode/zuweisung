@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: zuweisung
+# key: zu
+# --
+<zuweisung req="${1:req}"
+           to="${2:to}"${3: silent="true"}/>

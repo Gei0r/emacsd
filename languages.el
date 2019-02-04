@@ -8,7 +8,8 @@
   (setq org-startup-folded 'content)
   (setq org-startup-indented t)
   (setq org-support-shift-select 'always)
-  (auto-fill-mode 1))
+  (auto-fill-mode 1)
+  (column-number-mode 1))
 
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
@@ -28,13 +29,6 @@
 (use-package asm86-mode
   :quelpa (asm86-mode :fetcher github :repo "gei0r/asm86-mode")
   :mode "\\.asm"
-  :bind
-  ((:map asm86-mode-map
-         (("RET" . (lambda ()
-                     (interactive)
-                     (if (looking-back ";;.*")
-                         (progn (indent-new-comment-line)(insert " "))
-                       (newline-and-indent)))))))
   :config
   (setq asm86-blank-base-offset 4)
   (setq asm86-code-comment-base-offset 4)
@@ -54,7 +48,15 @@
   (setq asm86-tab-base-offset 4)
   (setq asm86-tab-func-offset 4)
   (setq asm86-variable-base-offset 4)
-  (setq asm86-variable-func-offset 8))
+  (setq asm86-variable-func-offset 8)
+  (add-hook 'asm86-mode-hook
+            '(lambda()
+               (define-key asm86-mode-map (kbd "RET")
+                 (lambda () (interactive)(if (looking-back ";;.*")
+                                             (progn
+                                               (indent-new-comment-line)
+                                               (insert " "))
+                                           (newline-and-indent)))))))
 
 (use-package typescript-mode
   :mode("\\.ts" "\\.tsx" "\\.js"))
@@ -76,6 +78,10 @@
   ((:map tide-mode-map (("<f2>" . tide-jump-to-definition)
                         ("M-<left>" . tide-jump-back)))))
 
+(use-package bibtex
+  :config
+  (define-key bibtex-mode-map (kbd "C-j") nil))
+
 (use-package lsp-mode
   :commands lsp
   :config
@@ -90,16 +96,14 @@
   (setq lsp-ui-sideline-enable nil)
   (setq lsp-ui-doc-render-function
         (lambda(str)
+          "Beautify text in side window (remove ^M and set correct encoding)"
           (s-trim
            (replace-regexp-in-string
             "" ""
             (decode-coding-string str 'latin-1)))))
   (setq lsp-ui-doc-include-signature t))
-(use-package company-lsp :commands company-lsp)
 
-(use-package bibtex
-  :config
-  (define-key bibtex-mode-map (kbd "C-j") nil))
+(use-package company-lsp :commands company-lsp)
 
 (use-package ccls
   :defer t
