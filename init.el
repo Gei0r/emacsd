@@ -47,7 +47,7 @@
  '(mouse-wheel-scroll-amount (quote (6 ((shift) . 1) ((control) . 0.5))))
  '(package-selected-packages
    (quote
-    (git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (overlay cqtbl cq compilation-mode git-gutter+ git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -115,6 +115,7 @@
   :bind
   (("C-b" . helm-mini)
    ("C-o" . helm-find-files)
+   ("C-x h" . helm-resume)
    (:map helm-map
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)
@@ -124,6 +125,9 @@
          ("C-d" . helm-toggle-buffer-details))
    (:map cua--cua-keys-keymap ("M-v" . helm-show-kill-ring))))
 (helm-mode 1)
+
+(use-package compile
+  :bind ((:map compilation-mode-map (("C-o" . helm-find-files)))))
 
 (use-package helm-ls-git :bind (("C-S-o" . helm-ls-git-ls)))
 
@@ -166,7 +170,7 @@
   :config (setq bm-highlight-style 'bm-highlight-only-fringe)
   :custom-face (bm-fringe-face ((t (:background "deep sky blue" :foreground "White")))))
 
-(use-package ws-butler :config (setq ws-butler-global-mode t))
+(use-package ws-butler :config (ws-butler-global-mode))
 
 (use-package ebed-helpers :load-path "ebed"
   :commands ebed:revert-buffer-without-prompt)
@@ -246,4 +250,4 @@
 (load-file "~/.emacs.d/languages.el")
 
 (load-file "~/.emacs.d/mykeys.el")
-
+(when isSiemens (load-file "~/.emacs.d/cq/init-cq.el"))

@@ -1,5 +1,6 @@
-(use-package cq
-  ;;:require org
+(use-package ivy)
+
+(use-package cq :load-path "cq"
   ;;:commands (cq-find-file-hook clearcase-font-lock cq-font-lock)
   :if (eq system-type 'windows-nt)
   :config
@@ -14,8 +15,9 @@
   (add-hook 'prog-mode-hook 'cq-font-lock)
 
   (add-hook 'find-file-hook 'cq-find-file-hook)
+  (setq cq-browser "D:/User/Adrian/Programme/FirefoxPortable/FirefoxPortable.exe")
   )
 
-(use-package cqtbl
+(use-package cqtbl :load-path "cq"
   :commands (cqtbl-merge-tables)
   )
