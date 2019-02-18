@@ -74,6 +74,7 @@
 (setq-default buffer-file-coding-system 'utf-8-unix)
 (set-language-environment "UTF-8")
 (global-auto-revert-mode)
+(setq revert-without-query t)
 
 ; Disable the stupid bell
 (defun my-bell-function ())
