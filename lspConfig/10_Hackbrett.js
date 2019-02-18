@@ -29,19 +29,34 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
        bekommt den alten Wert übergeben und muss den neuen Wert zurückgeben.
     */
     const config = {
-        "Hackbrett/_inc": {root: "Hackbrett/_inc"},
+        "Hackbrett/_inc": {
+            root: "Hackbrett/_inc",
+            incdirs: ["Hackbrett/_inc", "Hackbrett/_inc/appl",
+                "Hackbrett/_inc/devl",
+                "Hackbrett/_tools/386/include"],
+            flags: ["-Wall", "-Wno-microsoft-cast",
+                "-nostdinc++", "-nostdinc"],
+        },
+
         "Hackbrett/_section": {
             incdirs: ["Hackbrett/_inc", "Hackbrett/_inc/appl",
-                      "Hackbrett/_inc/devl"],
-            defines: {"far": "", "FAR": "", "near": "", "NEAR": ""},
+                "Hackbrett/_inc/devl",
+                "Hackbrett/_tools/386/include"],
+            defines: { "far": "", "FAR": "", "near": "", "NEAR": "" },
             flags: ["-Wall", "-Wno-microsoft-cast",
-                    "-nostdinc++", "-nostdinc"],
+                "-nostdinc++", "-nostdinc",
+                `--include${__dirname.replace(/\\/g, "/")}/CADUL-defs.h`],
             root: (_unused, file) =>
                 path.parse(locateDominatingFile(file, "_make")).dir
         },
 
+        "Hackbrett/_section/cu-boards/ecc/devEcccu": {
+            root: "Hackbrett/_section/cu-boards/ecc/devEcccu",
+            incdirs: ["Hackbrett/_section/cu-boards/ecc/devEcccu/_inc"]
+        },
+
         "Hackbrett/_section/devices/file/_test_src": {
-            defines: {"TESTRUNNER_NO_STL": "1"}
+            defines: { "TESTRUNNER_NO_STL": "1" }
         },
 
         "Hackbrett/_section/kernel32": {
@@ -58,7 +73,7 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
         },
 
         "Hackbrett/_section/devices/file": {
-            defines: {"THROW_NOTHING": "throw"}
+            defines: { "THROW_NOTHING": "throw" }
         }
     };
 
@@ -160,10 +175,6 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
         ret.directory = path.isAbsolute(cnf.root) ?
             cnf.root : `${cnf.CCRoot}/${cnf.root}`;
         ret.command = "clang++ ";
-        if (cnf.incdirs !== undefined) {
-            ret.command +=
-                cnf.incdirs.map(d => `-I${cnf.CCRoot}/${d}`).join(" ") + " ";
-        }
 
         if (cnf.defines !== undefined) {
             let defs = [];
@@ -180,6 +191,11 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         if (cnf.flags !== undefined) {
             ret.command += cnf.flags.join(" ") + " ";
+        }
+
+        if (cnf.incdirs !== undefined) {
+            ret.command +=
+                cnf.incdirs.map(d => `-I${cnf.CCRoot}/${d}`).join(" ") + " ";
         }
 
         ret.command += cppfile;
