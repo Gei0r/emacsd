@@ -134,3 +134,6 @@
   (tv-channel3 ((t (:background "#002255"))))
   (tv-test-positive ((t (:background "forest green"))))
   (tv-test-start ((t (:background "yellow3" :foreground "#483737")))))
+
+(use-package findcode :load-path "ebed"
+  :commands ebed:findCodePoint)

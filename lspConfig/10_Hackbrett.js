@@ -18,8 +18,8 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
          Weitere flags für clang++.
     
        root: string
-         Projektverzeichnis. Wenn es ein relativer Pfad ist, wird es als relativ
-         zum ClearCase-Root gewertet.
+         Projektverzeichnis. Wenn es ein relativer Pfad ist, wird es als
+         relativ zum ClearCase-Root gewertet.
     
        Wenn der Typ ein Array oder ein Objekt ist, werden die Einträge den
        bestehenden Einträgen hinzugefügt (an das Ende).
