@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: single suppress
+# binding: C-t s
+# expand-env : ((yas-wrap-around-region 1))
+# --
+/**
+ * @check `(format-time-string "%Y%m%d")` ebed (${1:rule})
+ * $1 ${2:ruleText}
+ *   --> ${3:reason}
+ */
+// BEGIN SUPPRESS $1
+$0
+// END SUPPRESS $1

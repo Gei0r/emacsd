@@ -1,0 +1,9 @@
+elpa/**
+quelpa/**
+.lsp-session-v1
+.mc-lists.el
+auto-save-list/**
+eshell/**
+recentf
+server/**
+transient/**

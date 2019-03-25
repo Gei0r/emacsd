@@ -57,12 +57,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bm-fringe-face ((t (:background "deep sky blue" :foreground "White"))))
- '(ccls-skipped-range-face ((t nil)))
- '(column-marker-1 ((t (:background "#782121"))))
  '(highlight ((t (:background "dark slate blue" :foreground "ivory"))))
- '(hl-line ((t (:background "dark slate gray"))))
- '(idle-highlight ((t (:background "MediumPurple4")))))
+ '(hl-line ((t (:background "dark slate gray")))))
 
 (if (eq system-type 'windows-nt)
     (face-spec-set 'default '((t :height 120 :family "Courier New")))
@@ -217,7 +213,9 @@
   (setq company-idle-delay nil)
   (setq company-show-numbers t)
   (delete 'company-clang company-backends)
-  (delete 'company-semantic company-backends))
+  (delete 'company-semantic company-backends)
+  :custom-face
+  (company-tooltip ((t (:background "#fce94f" :foreground "black")))))
 
 (use-package yasnippet
   :config

@@ -98,6 +98,7 @@
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-require-clients nil)
+  (setq lsp-enable-on-type-formatting nil)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack)))))
@@ -121,7 +122,8 @@
   :config
   (setq ccls-args (list "--log-file=D:/temp/loggi.txt" "-v=1"))
   (setq ccls-sem-highlight-method 'font-lock)
-  (idle-highlight-mode -1))
+  (idle-highlight-mode -1)
+  :custom-face (ccls-skipped-range-face ((t nil))))
 
 (use-package ebed-ccls-config :load-path "lspConfig"
   :hook ((c-mode c++-mode) . ebed:ccls-config-init))
@@ -137,3 +139,6 @@
 
 (use-package findcode :load-path "ebed"
   :commands ebed:findCodePoint)
+
+(use-package flycheck-codecheck :load-path "ebed"
+  :commands ebed:flycheck-codecheck-enable-in-this-buffer)

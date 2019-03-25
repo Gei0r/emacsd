@@ -10,6 +10,7 @@
 #define selector WORD
 #define CADUL 1
 #define _T_WCHAR
+#define BOOL bool
 
 #define GENESIS_EXPORT(a,b,c,d) do{}while(0);
 

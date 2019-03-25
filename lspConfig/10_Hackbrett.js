@@ -52,7 +52,8 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         "Hackbrett/_section/cu-boards/ecc/devEcccu": {
             root: "Hackbrett/_section/cu-boards/ecc/devEcccu",
-            incdirs: ["Hackbrett/_section/cu-boards/ecc/devEcccu/_inc"]
+            incdirs: ["Hackbrett/_section/cu-boards/ecc/devEcccu/_inc",
+                "Hackbrett/_section/cu-boards/uecc/inspector/_src"]
         },
 
         "Hackbrett/_section/devices/file/_test_src": {
@@ -102,7 +103,7 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
         let cppFiles =
             getFilesInDirRecursive(rootDir,
                 d => d !== ".ccls-cache" && d !== "_scratch",
-                f => f.endsWith(".cpp"));
+                f => f.endsWith(".cpp") || f.endsWith(".h"));
 
         return cppFiles.map(cppFile =>
             buildCompileCommandsForFile(hackbrett,
