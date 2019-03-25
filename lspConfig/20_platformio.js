@@ -66,8 +66,9 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 path.resolve("C:/" + process.env.HOMEPATH + "/.platformio")
                     .replace(/\\/g, "/");
         } else {
-            pioHomeDir = path.resolve("~/.platformio");
+            pioHomeDir = path.resolve(process.env.HOME + "/.platformio");
         }
+        fs.writeSync(logfile, "pioHomeDir: " + pioHomeDir + "\n");
 
         let frBase = `${pioHomeDir}/packages/framework-arduinoespressif8266`;
         let tcBase = `${pioHomeDir}/packages/toolchain-xtensa`;

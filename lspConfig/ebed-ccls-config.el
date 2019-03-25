@@ -28,8 +28,11 @@
 ;;; Code:
 
 (defcustom ebed:ccls-config-program
-  (concat (file-name-directory (or load-file-name buffer-file-name))
-          "cclsConfig.bat")
+  (if (eq system-type 'windows-nt)
+      (concat (file-name-directory (or load-file-name buffer-file-name))
+              "cclsConfig.bat")
+    (concat (file-name-directory (or load-file-name buffer-file-name))
+            "cclsConfig.sh"))
   "Tool to call to get ccls configuration.
 
 Must support two modes:

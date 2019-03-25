@@ -47,7 +47,7 @@
  '(mouse-wheel-scroll-amount (quote (6 ((shift) . 1) ((control) . 0.5))))
  '(package-selected-packages
    (quote
-    (git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (git-gutter+ git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -62,7 +62,7 @@
  '(column-marker-1 ((t (:background "#782121"))))
  '(highlight ((t (:background "dark slate blue" :foreground "ivory"))))
  '(hl-line ((t (:background "dark slate gray"))))
- '(idle-highlight ((t (:background "MediumPurple4")))))
+ '(idle-highlight ((t (:background "MediumPurple4"))) t))
 
 (if (eq system-type 'windows-nt)
     (face-spec-set 'default '((t :height 120 :family "Courier New")))

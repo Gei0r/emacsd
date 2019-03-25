@@ -87,6 +87,7 @@
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-require-clients nil)
+  (setq lsp-enable-on-type-formatting nil)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack)))))
@@ -108,7 +109,10 @@
 (use-package ccls
   :defer t
   :config
-  (setq ccls-args (list "--log-file=D:/temp/loggi.txt" "-v=1"))
+  (setq ccls-args
+        (if (eq system-type 'windows-nt)
+            (list "--log-file=D:/temp/loggi.txt" "-v=1")
+          (list "--log-file=/tmp/loggi.txt" "-v=1")))
   (setq ccls-sem-highlight-method 'font-lock)
   (idle-highlight-mode -1))
 
