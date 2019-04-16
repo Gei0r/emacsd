@@ -91,7 +91,8 @@
   :hook ((web-mode . ebed:progface)
          (c-mode-common . ebed:progface)
 		 (emacs-lisp-mode . ebed:progface)
-         (typescript-mode . ebed:progface)))
+         (typescript-mode . ebed:progface)
+         (python-mode . ebed:progface)))
 
 (use-package helm
   :init
@@ -115,6 +116,7 @@
   :bind
   (("C-b" . helm-mini)
    ("C-o" . helm-find-files)
+   ("C-x h" . helm-resume)
    (:map helm-map
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)

@@ -87,6 +87,7 @@
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-require-clients nil)
+  (setq lsp-enable-indentation nil)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack)))))
@@ -114,3 +115,5 @@
 
 (use-package ebed-ccls-config :load-path "lspConfig"
   :hook ((c-mode c++-mode) . ebed:ccls-config-init))
+
+(add-to-list 'auto-mode-alist '("\\.do\\'" . sh-mode))
