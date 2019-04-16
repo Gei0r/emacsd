@@ -30,6 +30,11 @@
         (split-height-threshold 0))
     ad-do-it))
 
+(defun ebed:move-to-end-of-buffer (buffer-name)
+  (interactive)
+  (let ((end (with-current-buffer buffer-name (point-max))))
+    (set-window-point (get-buffer-window buffer-name) end)))
+
 (defun ebed:buffer-has-codecheck-violations(buffer)
   (let ((error-found nil))
     (with-current-buffer buffer
@@ -77,7 +82,8 @@
           (setq compilation-finish-functions 'ebed:compile-chain-last))
 
         ;; call compile with saved command
-        (compile next-command))
+        (compile next-command)
+        (run-at-time "1 sec" nil 'ebed:move-to-end-of-buffer "*compilation*"))
 
       (progn
         (setq compilation-finish-functions nil)

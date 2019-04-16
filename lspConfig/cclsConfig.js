@@ -39,12 +39,14 @@
 
 const fs = require('fs');
 const path = require('path');
+const logfilename = process.platform == 'win32' ?
+    "D:/temp/lspConfig.log" : "/tmp/lspConfig.log";
 
 async function main() {
     let logfile = undefined;
     try {
         // open logfile
-        logfile = fs.openSync("D:/temp/lspConfig.log", 'a');
+        logfile = fs.openSync(logfilename, 'a');
         fs.writeSync(logfile, '\n\n----------------------------\n');
         fs.writeSync(logfile, `argv: ${JSON.stringify(process.argv)}\n`);
         fs.writeSync(logfile, `cwd: ${process.cwd()}\n`);

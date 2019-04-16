@@ -14,17 +14,28 @@
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
 (use-package web-mode
-  :mode ("\\.jsx" "\\.xml" "\\.html")
+  :mode ("\\.jsx" "\\.xml" "\\.html" "\\.json" "\\.ms" "\\.mus")
   :config
     (setq web-mode-auto-close-style 2)
-	(setq web-mode-markup-indent-offset 2))
+	(setq web-mode-markup-indent-offset 2)
+    (setq web-mode-engines-alist
+          '(("ctemplate"    . "\\.ms")
+          ("ctemplate" . "\\.mus"))))
+
+(use-package ebed-pretty-c-comments :load-path "ebed"
+  :commands (ebed:activate-pretty-c-block-comments
+             ebed:new-line-and-maybe-prettify-comment))
 
 (use-package cc-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+  :bind
+  ((:map c-mode-base-map
+         (("RET" . 'ebed:new-line-and-maybe-prettify-comment))))
   :config
     (setq c-default-style "bsd" c-basic-offset 4)
-    (add-to-list 'c-offsets-alist '(case-label . 4)))
+    (add-to-list 'c-offsets-alist '(case-label . 4))
+    (ebed:activate-pretty-c-block-comments))
 
 (use-package asm86-mode
   :quelpa (asm86-mode :fetcher github :repo "gei0r/asm86-mode")
@@ -59,7 +70,7 @@
                                            (newline-and-indent)))))))
 
 (use-package typescript-mode
-  :mode("\\.ts" "\\.tsx" "\\.js"))
+  :mode("\\.ts" "\\.tsx" "\\.js$"))
 
 (use-package tide
   :hook
@@ -88,6 +99,7 @@
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-require-clients nil)
   (setq lsp-enable-indentation nil)
+  (setq lsp-enable-on-type-formatting nil)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack)))))
@@ -100,7 +112,8 @@
           "Beautify text in side window (remove ^M and set correct encoding)"
           (s-trim
            (replace-regexp-in-string
-            "" ""
+            "
+" ""
             (decode-coding-string str 'latin-1)))))
   (setq lsp-ui-doc-include-signature t))
 
@@ -109,11 +122,30 @@
 (use-package ccls
   :defer t
   :config
-  (setq ccls-args (list "--log-file=D:/temp/loggi.txt" "-v=1"))
+  (setq ccls-args
+        (if (eq system-type 'windows-nt)
+            (list "--log-file=D:/temp/loggi.txt" "-v=1")
+          (list "--log-file=/tmp/loggi.txt" "-v=1")))
   (setq ccls-sem-highlight-method 'font-lock)
-  (idle-highlight-mode -1))
+  (idle-highlight-mode -1)
+  :custom-face (ccls-skipped-range-face ((t nil))))
 
 (use-package ebed-ccls-config :load-path "lspConfig"
   :hook ((c-mode c++-mode) . ebed:ccls-config-init))
 
 (add-to-list 'auto-mode-alist '("\\.do\\'" . sh-mode))
+
+(use-package tvfile :load-path "hs"
+  :commands tvfile-minor-mode
+  :custom-face
+  (tv-channel1 ((t (:background "#aa8800"))))
+  (tv-channel2 ((t (:background "#800000"))))
+  (tv-channel3 ((t (:background "#002255"))))
+  (tv-test-positive ((t (:background "forest green"))))
+  (tv-test-start ((t (:background "yellow3" :foreground "#483737")))))
+
+(use-package findcode :load-path "ebed"
+  :commands ebed:findCodePoint)
+
+(use-package flycheck-codecheck :load-path "ebed"
+  :commands ebed:flycheck-codecheck-enable-in-this-buffer)

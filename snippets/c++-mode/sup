@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: sup
+# key: sup
+# --
+/**
+ * @check `(format-time-string "%Y%m%d")` ebed (${1:rule})
+ * $1 ${2:ruleText}
+ *   --> ${3:reason}
+ */
+// SUPPRESS $1

@@ -25,7 +25,8 @@
 
 ;;; Code:
 
-(use-package idle-highlight-mode)
+(use-package idle-highlight-mode
+  :custom-face (idle-highlight ((t (:background "MediumPurple4")))))
 
 (use-package column-marker :load-path "ebed"
   :commands column-marker-1

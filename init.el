@@ -47,7 +47,7 @@
  '(mouse-wheel-scroll-amount (quote (6 ((shift) . 1) ((control) . 0.5))))
  '(package-selected-packages
    (quote
-    (git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
+    (overlay cqtbl cq compilation-mode git-gutter+ git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package)))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -57,12 +57,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bm-fringe-face ((t (:background "deep sky blue" :foreground "White"))))
- '(ccls-skipped-range-face ((t nil)))
- '(column-marker-1 ((t (:background "#782121"))))
  '(highlight ((t (:background "dark slate blue" :foreground "ivory"))))
- '(hl-line ((t (:background "dark slate gray"))))
- '(idle-highlight ((t (:background "MediumPurple4")))))
+ '(hl-line ((t (:background "dark slate gray")))))
 
 (if (eq system-type 'windows-nt)
     (face-spec-set 'default '((t :height 120 :family "Courier New")))
@@ -74,6 +70,7 @@
 (setq-default buffer-file-coding-system 'utf-8-unix)
 (set-language-environment "UTF-8")
 (global-auto-revert-mode)
+(setq revert-without-query '(".*"))
 
 ; Disable the stupid bell
 (defun my-bell-function ())
@@ -127,6 +124,9 @@
    (:map cua--cua-keys-keymap ("M-v" . helm-show-kill-ring))))
 (helm-mode 1)
 
+(use-package compile
+  :bind ((:map compilation-mode-map (("C-o" . helm-find-files)))))
+
 (use-package helm-ls-git :bind (("C-S-o" . helm-ls-git-ls)))
 
 (use-package helm-swoop :bind (("C-f" . helm-swoop-without-pre-input))
@@ -168,7 +168,7 @@
   :config (setq bm-highlight-style 'bm-highlight-only-fringe)
   :custom-face (bm-fringe-face ((t (:background "deep sky blue" :foreground "White")))))
 
-(use-package ws-butler :config (setq ws-butler-global-mode t))
+(use-package ws-butler :config (ws-butler-global-mode))
 
 (use-package ebed-helpers :load-path "ebed"
   :commands ebed:revert-buffer-without-prompt)
@@ -214,7 +214,9 @@
   (setq company-idle-delay nil)
   (setq company-show-numbers t)
   (delete 'company-clang company-backends)
-  (delete 'company-semantic company-backends))
+  (delete 'company-semantic company-backends)
+  :custom-face
+  (company-tooltip ((t (:background "#fce94f" :foreground "black")))))
 
 (use-package yasnippet
   :config
@@ -248,4 +250,4 @@
 (load-file "~/.emacs.d/languages.el")
 
 (load-file "~/.emacs.d/mykeys.el")
-
+(when isSiemens (load-file "~/.emacs.d/cq/init-cq.el"))
