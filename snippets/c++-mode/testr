@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Testrunner-Testcase
+# key: testr
+# --
+INT32 far ${1:Class}_Tester::${2:func}()
+{
+    TESTRUNNER_EXPORT_TESTER($1, $2,
+                             "Input-Connector2|$1|$2");
+
+    test.fail("TODO: Testfaelle fehlen", __LINE__);
+
+    return test.result(L);
+}

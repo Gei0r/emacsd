@@ -250,3 +250,6 @@
 
 (load-file "~/.emacs.d/mykeys.el")
 (when isSiemens (load-file "~/.emacs.d/cq/init-cq.el"))
+
+(use-package ebed-macros :load-path "ebed"
+  :commands ebed:setup-keyboard-macros)

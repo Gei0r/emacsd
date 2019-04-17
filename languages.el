@@ -1,7 +1,10 @@
 
 (use-package org
+  :mode (("\\.org$" . org-mode) ("\\.docbuilder$" . org-mode))
   :bind
-  ((:map org-mode-map (("C-j" . nil) ("C-k" . nil))))
+  ((:map org-mode-map (
+                       ("C-j" . nil) ("C-k" . nil)
+                       ("C-a" . mark-whole-buffer))))
   :config
   (setq org-blank-before-new-entry
         (quote ((heading . t) (plain-list-item))))

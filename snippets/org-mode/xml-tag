@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: xml-tags
-# key: lt
+# name: xml-tag
+# key: x
 # --
-&lt;$1&gt;
+<${1:tag}${2:attrs}>$0</$1>
