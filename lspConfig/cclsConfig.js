@@ -39,12 +39,14 @@
 
 const fs = require('fs');
 const path = require('path');
+const logfilename = process.platform == 'win32' ?
+    "D:/temp/lspConfig.log" : "/tmp/lspConfig.log";
 
 async function main() {
     let logfile = undefined;
     try {
         // open logfile
-        logfile = fs.openSync("D:/temp/lspConfig.log", 'a');
+        logfile = fs.openSync(logfilename, 'a');
         fs.writeSync(logfile, '\n\n----------------------------\n');
         fs.writeSync(logfile, `argv: ${JSON.stringify(process.argv)}\n`);
         fs.writeSync(logfile, `cwd: ${process.cwd()}\n`);
@@ -118,7 +120,13 @@ function locateDominatingFile(file, name) {
 
     if (file === undefined) file = process.cwd();
     file = path.resolve(file).replace(/\\/g, "/");
-    if (fs.statSync(file).isFile()) {
+
+    let isDir = false;
+    try {
+        isDir = fs.statSync(file).isDirectory();
+    } catch (e) { /* doesn't exist --> not a dir either */ }
+
+    if (!isDir) {
         // start at the file's parent directory instead
         file = path.parse(file).dir;
     }

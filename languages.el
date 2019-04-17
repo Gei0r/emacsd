@@ -101,6 +101,7 @@
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-require-clients nil)
+  (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
@@ -114,7 +115,8 @@
           "Beautify text in side window (remove ^M and set correct encoding)"
           (s-trim
            (replace-regexp-in-string
-            "" ""
+            "
+" ""
             (decode-coding-string str 'latin-1)))))
   (setq lsp-ui-doc-include-signature t))
 
@@ -123,13 +125,18 @@
 (use-package ccls
   :defer t
   :config
-  (setq ccls-args (list "--log-file=D:/temp/loggi.txt" "-v=1"))
+  (setq ccls-args
+        (if (eq system-type 'windows-nt)
+            (list "--log-file=D:/temp/loggi.txt" "-v=1")
+          (list "--log-file=/tmp/loggi.txt" "-v=1")))
   (setq ccls-sem-highlight-method 'font-lock)
   (idle-highlight-mode -1)
   :custom-face (ccls-skipped-range-face ((t nil))))
 
 (use-package ebed-ccls-config :load-path "lspConfig"
   :hook ((c-mode c++-mode) . ebed:ccls-config-init))
+
+(add-to-list 'auto-mode-alist '("\\.do\\'" . sh-mode))
 
 (use-package tvfile :load-path "hs"
   :commands tvfile-minor-mode

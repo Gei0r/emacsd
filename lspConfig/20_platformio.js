@@ -17,9 +17,17 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
     function makeLibraryIncludeDirs(libdir) {
         let ret = [];
 
-        for (let dir of (fs.readdirSync(libdir, { withFileTypes: true })
-            .filter(e => e.isDirectory())
-            .map(d => d.name))) {
+        let dirs = [];
+        try {
+            dirs = fs.readdirSync(libdir, { withFileTypes: true })
+                .filter(e => e.isDirectory())
+                .map(d => d.name);
+        } catch (e) {
+            // ignore non-existing dir
+            return ret;
+        }
+
+        for (let dir of dirs) {
             let thisLibDir = `${libdir}/${dir}`;
             ret.push(thisLibDir);
 
@@ -58,8 +66,9 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 path.resolve("C:/" + process.env.HOMEPATH + "/.platformio")
                     .replace(/\\/g, "/");
         } else {
-            pioHomeDir = path.resolve("~/.platformio");
+            pioHomeDir = path.resolve(process.env.HOME + "/.platformio");
         }
+        fs.writeSync(logfile, "pioHomeDir: " + pioHomeDir + "\n");
 
         let frBase = `${pioHomeDir}/packages/framework-arduinoespressif8266`;
         let tcBase = `${pioHomeDir}/packages/toolchain-xtensa`;

@@ -88,7 +88,8 @@
   :hook ((web-mode . ebed:progface)
          (c-mode-common . ebed:progface)
 		 (emacs-lisp-mode . ebed:progface)
-         (typescript-mode . ebed:progface)))
+         (typescript-mode . ebed:progface)
+         (python-mode . ebed:progface)))
 
 (use-package helm
   :init
