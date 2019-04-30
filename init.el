@@ -102,7 +102,6 @@
   (setq helm-buffer-max-length nil)
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-ff-file-name-history-use-recentf t)
-  (setq helm-ff-skip-boring-files t)
   (setq helm-findutils-skip-boring-files t)
   (setq helm-recentf-fuzzy-match t)
   (add-to-list 'display-buffer-alist
