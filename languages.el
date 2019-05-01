@@ -1,7 +1,10 @@
 
 (use-package org
+  :mode (("\\.org$" . org-mode) ("\\.docbuilder$" . org-mode))
   :bind
-  ((:map org-mode-map (("C-j" . nil) ("C-k" . nil))))
+  ((:map org-mode-map (
+                       ("C-j" . nil) ("C-k" . nil)
+                       ("C-a" . mark-whole-buffer))))
   :config
   (setq org-blank-before-new-entry
         (quote ((heading . t) (plain-list-item))))
@@ -98,6 +101,7 @@
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-require-clients nil)
+  (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
@@ -111,7 +115,8 @@
           "Beautify text in side window (remove ^M and set correct encoding)"
           (s-trim
            (replace-regexp-in-string
-            "" ""
+            "
+" ""
             (decode-coding-string str 'latin-1)))))
   (setq lsp-ui-doc-include-signature t))
 
@@ -130,6 +135,8 @@
 
 (use-package ebed-ccls-config :load-path "lspConfig"
   :hook ((c-mode c++-mode) . ebed:ccls-config-init))
+
+(add-to-list 'auto-mode-alist '("\\.do\\'" . sh-mode))
 
 (use-package tvfile :load-path "hs"
   :commands tvfile-minor-mode

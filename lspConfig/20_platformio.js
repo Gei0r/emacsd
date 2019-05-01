@@ -60,6 +60,15 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
     async function getCCJson(rootDir, logfile) {
 
+        // if there is no platformio.ini file in rootDir, this is not a pio
+        // project.
+        try {
+            fs.accessSync(rootDir + "/platformio.ini", fs.constants.R_OK);
+        } catch (e) {
+            // no platformio.ini
+            return undefined;
+        }
+
         let pioHomeDir;
         if (process.platform === "win32") {
             pioHomeDir =

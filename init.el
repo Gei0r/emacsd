@@ -88,7 +88,8 @@
   :hook ((web-mode . ebed:progface)
          (c-mode-common . ebed:progface)
 		 (emacs-lisp-mode . ebed:progface)
-         (typescript-mode . ebed:progface)))
+         (typescript-mode . ebed:progface)
+         (python-mode . ebed:progface)))
 
 (use-package helm
   :init
@@ -101,7 +102,6 @@
   (setq helm-buffer-max-length nil)
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-ff-file-name-history-use-recentf t)
-  (setq helm-ff-skip-boring-files t)
   (setq helm-findutils-skip-boring-files t)
   (setq helm-recentf-fuzzy-match t)
   (add-to-list 'display-buffer-alist
@@ -260,3 +260,6 @@
 
 (load-file "~/.emacs.d/mykeys.el")
 (when isSiemens (load-file "~/.emacs.d/cq/init-cq.el"))
+
+(use-package ebed-macros :load-path "ebed"
+  :commands ebed:setup-keyboard-macros)

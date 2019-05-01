@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Header without ssn
+# key: hsn
+# --
+@HEADER{${1:header}_h,
+    title = "Headerfile \\"$1.h\\"",
+}
+
+@HEADER{$1_h:1,
+    title = "Headerfile \\"$1.h\\"",
+    sig = "${2:sig}"
+}
+
+@HEADER{$1_h:latest,
+    title = "Headerfile \\"$1.h\\"",
+    sig = "$2"
+}

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: norm
+# key: norm
+# --
+
+@MANUAL{DIN:EN:$1,
+    type =     "Deutsche Norm",
+    title =    "$3",
+    subtitle = "$4",
+    refid = "EN$1",
+    geprueft = "2018-07 ebed"
+}
+
+@MANUAL{DIN:EN:${1:nummer}:${2:jahr},
+    type =     "Deutsche Norm",
+    title =    "${3:title}",
+    subtitle = "${4:subtitle}",
+    refid = "EN$1",
+    geprueft = "2018-07 ebed"
+}

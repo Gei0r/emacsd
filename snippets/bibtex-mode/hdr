@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: hdr
+# key: hdr
+# --
+@HEADER{${1:header}_h,
+    title = "Headerfile \\"$1.h\\"",
+    scn = "${2:ssn}"
+}
+
+@HEADER{$1_h:1,
+    title = "Headerfile \\"$1.h\\"",
+    scn = "$2",
+    sig = "$3"
+}
+
+@HEADER{$1_h:latest,
+    title = "Headerfile \\"$1.h\\"",
+    scn = "$2",
+    sig = "${3:sig}"
+}
