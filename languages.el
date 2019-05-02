@@ -113,11 +113,12 @@
   (setq lsp-ui-doc-render-function
         (lambda(str)
           "Beautify text in side window (remove ^M and set correct encoding)"
-          (s-trim
-           (replace-regexp-in-string
-            "
-" ""
-            (decode-coding-string str 'latin-1)))))
+          (if (not (text-properties-at 0 str))
+              (s-trim
+               (replace-regexp-in-string
+                "" ""
+                (decode-coding-string str 'latin-1)))
+            str)))
   (setq lsp-ui-doc-include-signature t))
 
 (use-package company-lsp :commands company-lsp)
