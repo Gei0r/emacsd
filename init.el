@@ -124,7 +124,17 @@
 (helm-mode 1)
 
 (use-package compile
-  :bind ((:map compilation-mode-map (("C-o" . helm-find-files)))))
+  :bind ((:map compilation-mode-map (("C-o" . helm-find-files))))
+  :config
+  (require 'ansi-color)
+  (defun endless/colorize-compilation ()
+    "Colorize from `compilation-filter-start' to `point'."
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region
+       compilation-filter-start (point))))
+
+  (add-hook 'compilation-filter-hook
+            #'endless/colorize-compilation))
 
 (use-package helm-ls-git :bind (("C-S-o" . helm-ls-git-ls)))
 
