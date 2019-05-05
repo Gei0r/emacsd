@@ -203,7 +203,7 @@
   :bind ("<home>" . x4-smarter-beginning-of-line))
 
 (use-package ebed-misc :load-path "ebed"
-  :commands (ebed:insert-path)
+  :commands (ebed:insert-path ebed:printHash)
   :bind
   ("<f4>" . ebed:find-other-file)
   ("<S-return>" . ebed:newline-with-semicolon))
