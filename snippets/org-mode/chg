@@ -2,4 +2,4 @@
 # name: chg
 # key: chg
 # --
-<change v="${1:v}" km="${2:km}" date="${3:date}" author="${4:author}"/>
+  <change v="${2:v}" km="${1:km}" date="${3:date}" author="${4:author}"/>

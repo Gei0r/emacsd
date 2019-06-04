@@ -263,3 +263,4 @@
 
 (use-package ebed-macros :load-path "ebed"
   :commands ebed:setup-keyboard-macros)
+(put 'dired-find-alternate-file 'disabled nil)

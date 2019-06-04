@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: bucket
+# key: bu
+# --
+  <bucket>
+    <header>
+      ${1:header}
+    </header>
+    $0
+  </bucket>
