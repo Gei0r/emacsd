@@ -110,14 +110,14 @@
   :commands lsp-ui-mode
   :config
   (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-doc-render-function
-        (lambda(str)
-          "Beautify text in side window (remove ^M and set correct encoding)"
-          (s-trim
-           (replace-regexp-in-string
-            "
-" ""
-            (decode-coding-string str 'latin-1)))))
+  (advice-add 'lsp-ui-doc--extract-marked-string :around
+     (lambda (original marked-string &optional language)
+       "Beautify text in side window (remove ^M and set correct encoding)"
+       (funcall original
+                (cond ((stringp marked-string)
+                       (s-trim (decode-coding-string marked-string 'latin-1)))
+                      (t marked-string))
+                language)))
   (setq lsp-ui-doc-include-signature t))
 
 (use-package company-lsp :commands company-lsp)

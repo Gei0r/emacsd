@@ -88,6 +88,8 @@
     (setq to-paste (replace-regexp-in-string "\\\\" "/" to-paste))
     (insert to-paste)))
 
+(defun ebed:printHash(hash)
+  (maphash (lambda (key value) (message (format "%s -> %s" key value))) hash))
 
 (provide 'ebed-misc)
 ;;; ebed-misc.el ends here
