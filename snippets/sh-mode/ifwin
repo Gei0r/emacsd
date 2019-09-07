@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: ifwin
+# key: ifwin
+# --
+case \`uname -s\` in
+    MSYS_NT*|CYGWIN_NT*|Windows_NT*)
+        $1
+        ;;
+    *)
+esac
