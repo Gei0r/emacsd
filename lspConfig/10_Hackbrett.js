@@ -56,6 +56,10 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 "Hackbrett/_section/cu-boards/uecc/inspector/_src"]
         },
 
+        "Hackbrett/_section/Demo": {
+            incdirs: ["Hackbrett/_section/comm/Streams/_inc"]
+        },
+
         "Hackbrett/_section/devices/file/_test_src": {
             defines: { "TESTRUNNER_NO_STL": "1" }
         },

@@ -1,10 +1,17 @@
 
+(defun realign-org-tables()
+  (interactive)
+  (org-table-map-tables 'org-table-align))
+
 (use-package org
   :mode (("\\.org$" . org-mode) ("\\.docbuilder$" . org-mode))
   :bind
   ((:map org-mode-map (
                        ("C-j" . nil) ("C-k" . nil)
-                       ("C-a" . mark-whole-buffer))))
+                       ("C-a" . mark-whole-buffer)
+                       ("C-e" . eshell)
+                       ("C-c a" . realign-org-tables)
+                       )))
   :config
   (setq org-blank-before-new-entry
         (quote ((heading . t) (plain-list-item))))
@@ -152,3 +159,6 @@
 
 (use-package flycheck-codecheck :load-path "ebed"
   :commands ebed:flycheck-codecheck-enable-in-this-buffer)
+
+(use-package yaml-mode
+  :mode ("\\.yml" "\\.yaml"))

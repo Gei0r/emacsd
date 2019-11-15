@@ -91,5 +91,13 @@
 (defun ebed:printHash(hash)
   (maphash (lambda (key value) (message (format "%s -> %s" key value))) hash))
 
+
+
+(defun ebed:remove-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+
 (provide 'ebed-misc)
 ;;; ebed-misc.el ends here

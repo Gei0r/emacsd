@@ -71,9 +71,13 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         let pioHomeDir;
         if (process.platform === "win32") {
-            pioHomeDir =
-                path.resolve("C:/" + process.env.HOMEPATH + "/.platformio")
-                    .replace(/\\/g, "/");
+            if (process.env.PIOHOME !== undefined) {
+                pioHomeDir = process.env.PIOHOME;
+            } else {
+                pioHomeDir =
+                    path.resolve("C:/" + process.env.HOMEPATH + "/.platformio")
+                        .replace(/\\/g, "/");
+            }
         } else {
             pioHomeDir = path.resolve(process.env.HOME + "/.platformio");
         }

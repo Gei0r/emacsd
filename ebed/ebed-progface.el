@@ -32,6 +32,8 @@
   :commands column-marker-1
   :custom-face (column-marker-1 ((t (:background "#782121")))))
 
+(use-package git-gutter+ :commands git-gutter+-mode)
+
 ;; Use monospaced font faces in current buffer
 (defun ebed:progface ()
    "Sets fonts and other visual stuff for programming buffers"
@@ -44,7 +46,9 @@
    (column-marker-1 79)
    (show-paren-mode)
    (auto-fill-mode)
-   (idle-highlight-mode))
+   (idle-highlight-mode)
+   (git-gutter+-mode)
+   )
 
 (provide 'ebed-progface)
 ;;; ebed-progface.el ends here
