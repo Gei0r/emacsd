@@ -247,7 +247,8 @@
 
 
 (use-package ebed-bib :load-path "ebed"
-  :bind* ("C-x i" . ebed:getBibentryAtPoint)
+  :bind* (("C-x i" . ebed:getBibentryAtPoint)
+          ("C-x I" . ebed:gotoBibentryAtPoint))
   :config (setq ebed:bibDatabase "D:/User/Adrian/Literaturdatenbank"))
 
 (use-package git-gutter+
@@ -269,6 +270,8 @@
 
 (use-package make-scratch :load-path "ebed"
   :commands ebed:make-scratch)
+
+(server-start)
 
 (load-file "~/.emacs.d/languages.el")
 

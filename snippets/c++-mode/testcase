@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: testcase
+# key: testcase
+# --
+INT32 far ${1:name}()
+{
+    EXPORT_TESTER($1, "FarPtr|$1");
+    Testrunner test("$1");
+
+    test.fail("TODO: Testfaelle fehlen noch", __LINE__);
+
+    return test.result(L);
+}

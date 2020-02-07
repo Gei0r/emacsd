@@ -7,3 +7,4 @@ eshell/**
 recentf
 server/**
 transient/**
+node_modules

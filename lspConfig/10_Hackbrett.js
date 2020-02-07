@@ -31,17 +31,29 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
     const config = {
         "Hackbrett/_inc": {
             root: "Hackbrett/_inc",
-            incdirs: ["Hackbrett/_inc", "Hackbrett/_inc/appl",
-                "Hackbrett/_inc/devl",
-                "Hackbrett/_tools/386/include"],
+            incdirs: [
+                "Hackbrett/_inc", "Hackbrett/_inc/appl", "Hackbrett/_inc/devl",
+                "Hackbrett/_tools/386/include",
+                "Hackbrett/_inc/ds3_software_mirror/_inc",
+                "Hackbrett/_section/ds3/_inc",
+            ],
             flags: ["-Wall", "-Wno-microsoft-cast",
                 "-nostdinc++", "-nostdinc"],
         },
 
+        "Hackbrett/_inc/test": {
+            root: "Hackbrett/_inc/test",
+            flags: [`--include${__dirname.replace(/\\/g, "/")}/CADUL-defs.h`],
+            defines: { far: "", FAR: "", near: "", NEAR: "" },
+        },
+
         "Hackbrett/_section": {
-            incdirs: ["Hackbrett/_inc", "Hackbrett/_inc/appl",
-                "Hackbrett/_inc/devl",
-                "Hackbrett/_tools/386/include"],
+            incdirs: [
+                "Hackbrett/_inc", "Hackbrett/_inc/appl", "Hackbrett/_inc/devl",
+                "Hackbrett/_tools/386/include",
+                "Hackbrett/_inc/ds3_software_mirror/_inc",
+                "Hackbrett/_section/ds3/_inc",
+            ],
             defines: { "far": "", "FAR": "", "near": "", "NEAR": "" },
             flags: ["-Wall", "-Wno-microsoft-cast",
                 "-nostdinc++", "-nostdinc",
@@ -60,12 +72,11 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
             incdirs: ["Hackbrett/_section/comm/Streams/_inc"]
         },
 
-        "Hackbrett/_section/devices/file/_test_src": {
-            defines: { "TESTRUNNER_NO_STL": "1" }
-        },
-
         "Hackbrett/_section/kernel32": {
-            incdirs: ["Hackbrett/_section/kernel32/_inc"],
+            incdirs: [
+                "Hackbrett/_section/kernel32/_inc",
+                "Hackbrett/_section/kernel32/tasker/taskercontrol/_src",
+            ],
             root: "Hackbrett/_section/kernel32"
         },
 
