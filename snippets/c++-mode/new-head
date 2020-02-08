@@ -14,7 +14,7 @@
  * HISTORY
  * @change `(format-time-string "%Y%m%d")` ebed: File created.
  *
- * Copyright (C) Siemens Mobility GmbH, `(format-time-string "%Y")` All Rights Reserved
+ * Copyright (C) Siemens Mobility GmbH `(format-time-string "%Y")` All Rights Reserved
  */
 
 #ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H}

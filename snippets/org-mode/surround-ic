@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: surround-icode
+# binding: C-t i
+# expand-env : ((yas-wrap-around-region 1))
+# --
+<icode>$0</icode>

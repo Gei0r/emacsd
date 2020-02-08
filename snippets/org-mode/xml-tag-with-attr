@@ -2,4 +2,4 @@
 # name: xml-tag2
 # key: xx
 # --
-<${1:tag}${2:attr}>$0</$1>
+<${1:tag} ${2:attr}>$0</$1>

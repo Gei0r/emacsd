@@ -11,6 +11,8 @@
 #define CADUL 1
 #define _T_WCHAR
 #define BOOL bool
+#define TRUE true
+#define FALSE false
 
 #define GENESIS_EXPORT(a,b,c,d) do{}while(0);
 

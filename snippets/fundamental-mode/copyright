@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: copyright
+# key: copyright
+# --
+Copyright (C) Siemens Mobility GmbH `(format-time-string "%Y")` All Rights Reserved

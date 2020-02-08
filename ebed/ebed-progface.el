@@ -48,6 +48,7 @@
    (auto-fill-mode)
    (idle-highlight-mode)
    (git-gutter+-mode)
+   (highlight-regexp "[[:nonascii:]]" 'hi-pink)
    )
 
 (provide 'ebed-progface)

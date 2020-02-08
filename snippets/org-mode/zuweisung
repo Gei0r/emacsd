@@ -2,5 +2,4 @@
 # name: zuweisung
 # key: zu
 # --
-<zuweisung req="${1:req}"
-           to="K32+:Argparse" silent="true"/>
+<zuweisung req="${1:req}" to="ALL" silent="true"/>
