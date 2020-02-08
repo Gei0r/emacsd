@@ -28,17 +28,26 @@
 (defcustom ebed:bibDatabase "" "Verzeichnis der Literaturdatenbank"
   :type 'directory)
 
-(defun ebed:getBibEntry (entry what)
+(defun ebed:call_getbibentryJs (entry what)
   (interactive)
   (let (builder)
     (with-temp-buffer
       (call-process "node" nil t nil
                     (concat (file-name-directory
-                             (symbol-file 'ebed:getBibEntry))
+                             (symbol-file 'ebed:call_getbibentryJs))
                             "/getbibentry.js")
                     what
                     ebed:bibDatabase (encode-coding-string entry 'latin-1))
       (buffer-string))))
+
+(defun ebed:getBibIdAtPoint ()
+  (let (result)
+  (save-excursion
+    (re-search-backward "[[:space:]{,]")
+    (re-search-forward "[^[:space:],{}]+")
+    (setq result (match-string 0))
+    (set-text-properties 0 (length result) nil result)
+    result)))
 
 (defun ebed:getBibentryAtPoint ()
   (interactive)
@@ -46,25 +55,49 @@
     (setq entry (thing-at-point 'line t))
     (string-match "{\\([^,]+\\)," entry)
     (setq entry (match-string 1 entry))
-    (setq entry (ebed:getBibEntry entry "--info"))
+    (setq entry (ebed:call_getbibentryJs entry "--info"))
     (message entry)
     (kill-new entry)))
 
 (defun ebed:gotoBibentryAtPoint ()
   (interactive)
-  (let (entry result splits)
-    (save-excursion
-      (re-search-backward "[[:space:]{,]")
-      (re-search-forward "[^[:space:],{}]+")
-      (setq entry (match-string 0)))
-
-    (setq result (ebed:getBibEntry entry "--pos"))
+  (let ((entry (ebed:getBibIdAtPoint)) result splits)
+    (setq result (ebed:call_getbibentryJs entry "--pos"))
     (message result)
     (setq splits (split-string result "@" t "[:space:]"))
     (find-file-other-window (nth 0 splits))
     (goto-char (string-to-number (nth 1 splits)))))
 
+(defun ebed:call_getbibentryJs_async (entry what)
+  (start-process "getbibentryJs" nil
+                 "node"
+                 (concat (file-name-directory
+                          (symbol-file 'ebed:call_getbibentryJs))
+                         "/getbibentry.js")
+                    what
+                    ebed:bibDatabase
+                    (encode-coding-string entry 'latin-1)))
 
+(defface ebed:helmBib_ID
+  '((t
+     :foreground "green"))
+  "Face for the Bibliography ID in helm"
+  )
+
+(defun ebed:helmBibCandidates ()
+  (let (a)
+    (setq Value "A\nAffe")
+    (put-text-property 0 1 'face 'ebed:helmBib_ID Value)
+    `((,Value . a) ("B" . b))))
+
+(defun ebed:helmBib ()
+  (interactive)
+
+  (helm
+   :sources (helm-build-sync-source "test"
+              :candidates 'ebed:helmBibCandidates
+              :multiline t)
+        :buffer "*helm sync source*"))
 
 (provide 'ebed-bib)
 ;;; ebed-bib.el ends here

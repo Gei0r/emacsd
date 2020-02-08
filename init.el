@@ -128,7 +128,7 @@
    (:map helm-map
          ("<tab>" . helm-execute-persistent-action)
          ("C-i" . helm-execute-persistent-action)
-         ("C-z" . helm-select-action)
+         ("C-x ?" . helm-select-action)
          ("C-d" . helm-toggle-buffer-details))
    (:map helm--minor-mode-map
          ("C-d" . helm-toggle-buffer-details))
