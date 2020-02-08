@@ -1,4 +1,4 @@
-import { BuildBibentry } from './BuildBibentry'
+import { BuildBibentry, BibData } from './BuildBibentry'
 
 function printUsage() {
     const procname = `${process.argv[0]} ${process.argv[1]}`;
@@ -42,7 +42,15 @@ function pos(argv: string[], builder: BuildBibentry) {
 }
 
 function all(builder: BuildBibentry) {
-    console.log(builder.ids.join("\n"));
+    let result: BibData[] = [];
+
+    for (let id of builder.ids) {
+        let data = builder.getDocData(id);
+        data.id = id;
+        result.push(data);
+    }
+
+    console.log(JSON.stringify(result, null, 2));
 }
 
 async function main() {

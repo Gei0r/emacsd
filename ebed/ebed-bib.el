@@ -85,16 +85,35 @@
   )
 
 (defun ebed:helmBibCandidates ()
-  (let (a)
-    (setq Value "A\nAffe")
-    (put-text-property 0 1 'face 'ebed:helmBib_ID Value)
-    `((,Value . a) ("B" . b))))
+  (interactive)
+  (let* (
+         (json-object-type 'alist)
+         (json-array-type 'list)
+         (json (json-read-from-string (ebed:call_getbibentryJs "" "--all")))
+         (props '((id ebed:helmBib_ID) (type) (title) (subtitle) (sapid) (scn) (geprueft))))
+    (mapcar (lambda (entry)
+              ;; transform json object to (DISP . REAL) pair
+              (let (disp real)
+                (setq real (cdr (assoc 'id entry)))
+
+                (mapcar (lambda (prop_face)
+                          (let ((prop (nth 0 prop_face))
+                                (face (nth 1 prop_face))
+                                tmp)
+                            (setq tmp (cdr (assoc prop entry)))
+                            (when tmp
+                              (when face
+                                (put-text-property 0 (length tmp) 'face face tmp))
+                              (setq disp (concat disp tmp "\n"))))) props)
+
+                `(,(string-trim disp) . ,real)
+                )) json)))
 
 (defun ebed:helmBib ()
   (interactive)
 
   (helm
-   :sources (helm-build-sync-source "test"
+   :sources (helm-build-sync-source "Literaturdatenbank"
               :candidates 'ebed:helmBibCandidates
               :multiline t)
         :buffer "*helm sync source*"))
