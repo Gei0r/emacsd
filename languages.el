@@ -125,6 +125,7 @@
                        (s-trim (decode-coding-string marked-string 'latin-1)))
                       (t marked-string))
                 language)))
+  (setq lsp-ui-doc-position 'top)
   (setq lsp-ui-doc-include-signature t))
 
 (use-package company-lsp :commands company-lsp)

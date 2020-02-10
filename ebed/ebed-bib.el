@@ -28,6 +28,12 @@
 (defcustom ebed:bibDatabase "" "Verzeichnis der Literaturdatenbank"
   :type 'directory)
 
+(defface ebed:helmBib_ID
+  '((t
+     :foreground "#4fc24f"))
+  "Face for the Bibliography ID in helm"
+  )
+
 (defun ebed:call_getbibentryJs (entry what)
   (interactive)
   (let (builder)
@@ -49,40 +55,25 @@
     (set-text-properties 0 (length result) nil result)
     result)))
 
-(defun ebed:getBibentryAtPoint ()
-  (interactive)
-  (let (entry)
-    (setq entry (thing-at-point 'line t))
-    (string-match "{\\([^,]+\\)," entry)
-    (setq entry (match-string 1 entry))
-    (setq entry (ebed:call_getbibentryJs entry "--info"))
-    (message entry)
-    (kill-new entry)))
+(defun ebed:getBibentry (&optional id)
+  (let ((entry (if id id (ebed:getBibIdAtPoint))))
+    (ebed:call_getbibentryJs entry "--info")))
 
-(defun ebed:gotoBibentryAtPoint ()
+(defun ebed:copyBibentry (&optional id)
   (interactive)
-  (let ((entry (ebed:getBibIdAtPoint)) result splits)
+  (let ((result (ebed:getBibentry id)))
+    (message result)
+    (kill-new result)))
+
+(defun ebed:gotoBibentry (&optional id)
+  (interactive)
+  (let ((entry (if id id (ebed:getBibIdAtPoint)))
+        result splits)
     (setq result (ebed:call_getbibentryJs entry "--pos"))
     (message result)
     (setq splits (split-string result "@" t "[:space:]"))
     (find-file-other-window (nth 0 splits))
     (goto-char (string-to-number (nth 1 splits)))))
-
-(defun ebed:call_getbibentryJs_async (entry what)
-  (start-process "getbibentryJs" nil
-                 "node"
-                 (concat (file-name-directory
-                          (symbol-file 'ebed:call_getbibentryJs))
-                         "/getbibentry.js")
-                    what
-                    ebed:bibDatabase
-                    (encode-coding-string entry 'latin-1)))
-
-(defface ebed:helmBib_ID
-  '((t
-     :foreground "green"))
-  "Face for the Bibliography ID in helm"
-  )
 
 (defun ebed:helmBibCandidates ()
   (interactive)
@@ -115,8 +106,20 @@
   (helm
    :sources (helm-build-sync-source "Literaturdatenbank"
               :candidates 'ebed:helmBibCandidates
-              :multiline t)
-        :buffer "*helm sync source*"))
+              :multiline t
+              :action (helm-make-actions
+                       "Insert ID at point"
+                       (lambda (id) (insert id))
+                       "Goto definition"
+                       'ebed:gotoBibentry
+                       "Add ID to kill ring"
+                       (lambda (id) (kill-new id))
+                       "Add Entry to kill ring"
+                       'ebed:copyBibentry
+                       "Insert at point"
+                       (lambda (id) (insert (ebed:getBibentry id)))
+                       ))
+   :buffer "*helm sync source*"))
 
 (provide 'ebed-bib)
 ;;; ebed-bib.el ends here

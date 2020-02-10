@@ -247,8 +247,9 @@
 
 
 (use-package ebed-bib :load-path "ebed"
-  :bind* (("C-x i" . ebed:getBibentryAtPoint)
-          ("C-x I" . ebed:gotoBibentryAtPoint))
+  :bind* (("C-x i" . ebed:copyBibentry)
+          ("C-x I" . ebed:gotoBibentry)
+          ("C-j i" . ebed:helmBib))
   :config (setq ebed:bibDatabase "D:/User/Adrian/Literaturdatenbank"))
 
 (use-package git-gutter+
