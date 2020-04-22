@@ -43,6 +43,9 @@ Must support two modes:
           Output (stdout): compile_commands.json
           Example: <program> <project-root>")
 
+(defcustom ebed:ccls-enable t
+  "Whether to enable ccls or not")
+
 (defun ebed:find-ccls-project-root(session)
   "Find ccls project root by calling an external program
 
@@ -68,13 +71,14 @@ Program is set in ``ebed:ccls-config-program'', which see.
 
 Meant to be used as a hook on c-mode and c++-mode."
 
+  (when ebed:ccls-enable
   (advice-add 'lsp--find-root-interactively :before-until
               'ebed:find-ccls-project-root)
   (require 'ccls)
   (setq ccls-initialization-options
         (plist-put ccls-initialization-options
                    :compilationDatabaseCommand ebed:ccls-config-program))
-  (lsp))
+  (lsp)))
 
 
 (provide 'ebed-ccls-config)
