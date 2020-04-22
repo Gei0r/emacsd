@@ -160,7 +160,7 @@ Asynchronously runs 'xp codecheck $filename.cck' in the directory
   :modes '(c-mode c++-mode))
 
 (flycheck-add-next-checker 'c/c++-clang '(t . codecheck))
-(flycheck-add-next-checker 'lsp-ui '(t . codecheck))
+(flycheck-add-next-checker 'lsp '(t . codecheck))
 
 (nconc flycheck-checkers (list 'codecheck))
 
