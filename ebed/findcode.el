@@ -20,6 +20,7 @@
        current-sourcefilename
        target-filename
        target-linenumber
+       target-addr
        (map-file-number 0)
        temp-buffer)
 
@@ -63,7 +64,10 @@
                                 (directory-files (concat scratch-dir "/LST")
                                                  t "\\.lst$")))
 
-    (setq proc-asm-regex (concat "^ \\([0-9a-f]\\{8\\}\\)[^;\n]+"
+    (setq proc-asm-regex (concat "^ "
+                                 "\\([0-9a-f]\\{8\\}\\|"
+                                 "    [0-9a-f]\\{4\\}\\)"
+                                 "[^;\n]+"
                                  function-name
                                  "\\s-+PROC \\(\\(NEAR\\)\\|\\(FAR\\)\\)"))
 
@@ -82,12 +86,12 @@
 
               ;; remember file name
               (setq target-filename it)
-
+              (setq target-addr
+                    (+ offset (string-to-number (match-string 1) 16)))
+              (message "search for " target-addr)
               ;; find address (offset + (match-string 1))
-              (re-search-forward (format "^ %08x"
-                                         (+ offset (string-to-number
-                                                    (match-string 1)
-                                                    16))))
+              (re-search-forward (format "^ %08x\\|^     %04x"
+                                         target-addr target-addr))
 
               ;; remember line number
               (setq target-linenumber (line-number-at-pos))

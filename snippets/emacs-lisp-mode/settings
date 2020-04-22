@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: settings
+# key: settings
+# --
+(setq-local ebed:compile-dir (file-name-directory load-file-name))
+
+(setq-local ebed:compile-commands (list
+    ""
+))
