@@ -110,6 +110,7 @@
   (setq lsp-auto-require-clients nil)
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-file-watch-threshold 10000)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack)))))
@@ -163,3 +164,9 @@
 
 (use-package yaml-mode
   :mode ("\\.yml" "\\.yaml"))
+
+(use-package cmake-mode
+  :mode ("CMakeLists.txt"))
+
+(use-package cmake-font-lock
+  :hook ((cmake-mode) . cmake-font-lock-activate))

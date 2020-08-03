@@ -5,5 +5,5 @@
 (setq-local ebed:compile-dir (file-name-directory load-file-name))
 
 (setq-local ebed:compile-commands (list
-    ""
+    "$0"
 ))
