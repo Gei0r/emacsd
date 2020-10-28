@@ -39,8 +39,8 @@
    "Sets fonts and other visual stuff for programming buffers"
    (interactive)
    (if (eq system-type 'windows-nt)
-       (setq buffer-face-mode-face '(:family "Consolas" :height 140))
-     (setq buffer-face-mode-face '(:family "Inconsolata" :height 160)))
+       (setq buffer-face-mode-face '(:family "Consolas" :height 160))
+     (setq buffer-face-mode-face '(:family "Inconsolata" :height 180)))
    
    (buffer-face-mode)
    (column-marker-1 79)

@@ -71,8 +71,8 @@
  '(tv-test-start ((t (:background "yellow3" :foreground "#483737")))))
 
 (if (eq system-type 'windows-nt)
-    (face-spec-set 'default '((t :height 120 :family "Courier New")))
-  (face-spec-set 'default '((t :height 120 :family "DejaVu Sans Mono"))))
+    (face-spec-set 'default '((t :height 140 :family "Courier New")))
+  (face-spec-set 'default '((t :height 140 :family "DejaVu Sans Mono"))))
 
 (setq-default cursor-type 'bar)
 (cua-mode)
