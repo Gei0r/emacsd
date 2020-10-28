@@ -110,7 +110,7 @@
   (setq lsp-auto-require-clients nil)
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
-  (setq lsp-file-watch-threshold 10000)
+  (setq lsp-file-watch-threshold 20000)
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack)))))
