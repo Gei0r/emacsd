@@ -4,14 +4,14 @@
 (package-initialize)
 
 (if (getenv "CLEARCASE_GROUPS") (setq isSiemens t) (setq isSiemens nil))
-(when isSiemens
-  (setq url-using-proxy nil)
-  (setq url-proxy-services
-      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-        ("http" . "127.0.0.1:3128")
-        ("https" . "127.0.0.1:3128")))
-  (add-to-list 'package-archives
-      '("hs" . "g:/user/hs/emacs/packages")))
+;;(when isSiemens
+;;  (setq url-using-proxy nil)
+;;  (setq url-proxy-services
+;;      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;;        ("http" . "127.0.0.1:3128")
+;;        ("https" . "127.0.0.1:3128")))
+;;  (add-to-list 'package-archives
+;;      '("hs" . "g:/user/hs/emacs/packages")))
 
  
 ; install use-package
