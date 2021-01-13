@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: oldpath
+# key: oldpath
+# --
+set OLDPATH=%PATH%
+set PATH=%SystemRoot%;%SystemRoot%\system32;
+
+$0
+
+set PATH=%OLDPATH%
