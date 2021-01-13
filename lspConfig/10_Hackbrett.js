@@ -90,6 +90,10 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         "Hackbrett/_section/devices/file": {
             defines: { "THROW_NOTHING": "throw" }
+        },
+
+        "Hackbrett/_src/packager": {
+            root: "Hackbrett/_src/packager",
         }
     };
 
