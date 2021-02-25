@@ -61,6 +61,7 @@
  '(ccls-skipped-range-face ((t nil)))
  '(column-marker-1 ((t (:background "#782121"))))
  '(company-tooltip ((t (:background "#fce94f" :foreground "black"))))
+ '(cqtbl-highlight ((t (:inherit highlight :background "saddle brown"))))
  '(highlight ((t (:background "dark slate blue" :foreground "ivory"))))
  '(hl-line ((t (:background "dark slate gray"))))
  '(idle-highlight ((t (:background "MediumPurple4"))))

@@ -32,11 +32,12 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
         "Hackbrett/_inc": {
             root: "Hackbrett/_inc",
             incdirs: [
-                "Hackbrett/_inc", "Hackbrett/_inc/appl", "Hackbrett/_inc/devl",
+                "Hackbrett/_inc", "Hackbrett/_inc/devl",
                 "Hackbrett/_tools/386/include",
                 "Hackbrett/_inc/ds3_software_mirror/_inc",
                 "Hackbrett/_section/ds3/_inc",
             ],
+            isystem: ["Hackbrett/_inc/appl"],
             flags: ["-Wall", "-Wno-microsoft-cast",
                 "-nostdinc++", "-nostdinc"],
         },
@@ -54,7 +55,6 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 "Hackbrett/_inc/ds3_software_mirror/_inc",
                 "Hackbrett/_section/ds3/_inc",
             ],
-            defines: { "far": "", "FAR": "", "near": "", "NEAR": "" },
             flags: ["-Wall", "-Wno-microsoft-cast",
                 "-nostdinc++", "-nostdinc",
                 `--include${__dirname.replace(/\\/g, "/")}/CADUL-defs.h`],
@@ -90,6 +90,10 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         "Hackbrett/_section/devices/file": {
             defines: { "THROW_NOTHING": "throw" }
+        },
+
+        "Hackbrett/_src/packager": {
+            root: "Hackbrett/_src/packager",
         }
     };
 
@@ -212,6 +216,11 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
         if (cnf.incdirs !== undefined) {
             ret.command +=
                 cnf.incdirs.map(d => `-I${cnf.CCRoot}/${d}`).join(" ") + " ";
+        }
+
+        if (cnf.isystem !== undefined) {
+            ret.command += cnf.isystem.map(d =>
+                `-isystem${cnf.CCRoot}/${d}`).join(" ") + " ";
         }
 
         ret.command += cppfile;
