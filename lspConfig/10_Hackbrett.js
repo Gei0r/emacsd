@@ -94,6 +94,10 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         "Hackbrett/_src/packager": {
             root: "Hackbrett/_src/packager",
+        },
+
+        "Hackbrett/_src/what": {
+            root: "Hackbrett/_src/what",
         }
     };
 
