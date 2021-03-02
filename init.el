@@ -227,7 +227,8 @@
                                (push 'c/c++-gcc   flycheck-disabled-checkers))))
 
 (use-package company
-  :bind (("C-SPC" . company-complete))
+  :bind (("C-SPC" . company-complete)
+         ("C-c SPC" . company-complete))
   :hook (after-init-hook . global-company-mode)
   :config
   (setq company-idle-delay nil)
