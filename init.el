@@ -1,5 +1,6 @@
 ;; Melpa
 (require 'package)
+(setq package-gnupghome-dir "~/.emacs.d/elpa/gnupg")
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
@@ -13,7 +14,7 @@
 ;;  (add-to-list 'package-archives
 ;;      '("hs" . "g:/user/hs/emacs/packages")))
 
- 
+
 ; install use-package
 (unless package-archive-contents (package-refresh-contents))
 (unless (package-installed-p 'use-package) (package-install 'use-package))
