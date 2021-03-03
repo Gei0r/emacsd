@@ -50,7 +50,7 @@ function all(builder: BuildBibentry) {
         result.push(data);
     }
 
-    console.log(JSON.stringify(result, null, 2));
+    console.log(JSON.stringify(result));
 }
 
 async function main() {
@@ -68,6 +68,7 @@ async function main() {
 
         let builder = new BuildBibentry();
         await builder.addDatafile(datafile);
+        builder.enableWarnings = false;
 
         if (command == "--info") info(restArgs, builder);
         else if (command == "--pos") pos(restArgs, builder)
