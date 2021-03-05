@@ -3,9 +3,10 @@ import { BuildBibentry, BibData } from './BuildBibentry'
 function printUsage() {
     const procname = `${process.argv[0]} ${process.argv[1]}`;
     console.log(`Usage:
-${procname} --info <Bib Database> <entry id>
-${procname} --pos  <Bib Database> <entry id>
-${procname} --all  <Bib Database>
+${procname} --info  <Bib Database> <entry id>
+${procname} --pos   <Bib Database> <entry id>
+${procname} --sapid <Bib Database> <entry id>
+${procname} --all   <Bib Database>
 `);
 }
 
@@ -30,6 +31,12 @@ function info(argv: string[], builder: BuildBibentry) {
     }
     process.stdout.write(`/${name}/\n`);
     process.stdout.write(result);
+}
+
+function sapid(argv: string[], builder: BuildBibentry) {
+    let data = builder.getDocData(argv[0]);
+    if (data.sapid === undefined) process.stdout.write("(no sapid)");
+    process.stdout.write(data.sapid.replace(/\/.*/, ""));
 }
 
 function pos(argv: string[], builder: BuildBibentry) {
@@ -58,7 +65,8 @@ async function main() {
         if (process.argv.length < 4 ||
             (process.argv[2] !== "--info" &&
                 process.argv[2] !== "--pos" &&
-                process.argv[2] !== "--all")) {
+                process.argv[2] !== "--all" &&
+                process.argv[2] !== "--sapid")) {
             throw new Error('Usage');
         }
 
@@ -73,6 +81,7 @@ async function main() {
         if (command == "--info") info(restArgs, builder);
         else if (command == "--pos") pos(restArgs, builder)
         else if (command == "--all") all(builder);
+        else if (command == "--sapid") sapid(restArgs, builder);
 
     } catch (e) {
         if (e.message === "Usage") {

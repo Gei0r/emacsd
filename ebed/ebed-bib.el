@@ -65,6 +65,13 @@
     (message result)
     (kill-new result)))
 
+(defun ebed:getSapid (&optional id)
+  (interactive)
+  (let* ((entry (if id id (ebed:getBibIdAtPoint)))
+         (result (ebed:call_getbibentryJs entry "--sapid")))
+    (message result)
+    (kill-new result)))
+
 (defun ebed:gotoBibentry (&optional id)
   (interactive)
   (let ((entry (if id id (ebed:getBibIdAtPoint)))
@@ -118,6 +125,8 @@
                        'ebed:copyBibentry
                        "Insert at point"
                        (lambda (id) (insert (ebed:getBibentry id)))
+                       "Copy SAP-ID"
+                       'ebed:getSapid
                        ))
    :buffer "*helm sync source*"))
 
