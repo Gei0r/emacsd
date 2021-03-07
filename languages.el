@@ -105,15 +105,24 @@
 
 (use-package lsp-mode
   :commands lsp
+  :init
+  (define-key global-map (kbd "C-d") nil)
+  (define-key c++-mode-map (kbd "C-d") nil)
+  (setq lsp-keymap-prefix "C-d l")
   :config
+  (define-key lsp-mode-map (kbd "C-d l") lsp-command-map)
   (setq lsp-prefer-flymake nil)
-  (setq lsp-auto-require-clients nil)
   (setq lsp-enable-indentation nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-file-watch-threshold 20000)
+  (setq lsp-semantic-tokens-enable t)
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (when (fboundp idle-highlight-mode) (idle-highlight-mode -1))
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
-                       ("M-<left>" . xref-pop-marker-stack)))))
+                       ("M-<left>" . xref-pop-marker-stack))))
+  :hook ((c-mode c++-mode) . lsp)
+  )
 (use-package lsp-ui
   :commands lsp-ui-mode
   :config
@@ -130,20 +139,6 @@
   (setq lsp-ui-doc-include-signature t))
 
 (use-package company-lsp :commands company-lsp)
-
-(use-package ccls
-  :defer t
-  :config
-  (setq ccls-args
-        (if (eq system-type 'windows-nt)
-            (list "--log-file=D:/temp/loggi.txt" "-v=1")
-          (list "--log-file=/tmp/loggi.txt" "-v=1")))
-  (setq ccls-sem-highlight-method 'font-lock)
-  (idle-highlight-mode -1)
-  :custom-face (ccls-skipped-range-face ((t nil))))
-
-(use-package ebed-ccls-config :load-path "lspConfig"
-  :hook ((c-mode c++-mode) . ebed:ccls-config-init))
 
 (add-to-list 'auto-mode-alist '("\\.do\\'" . sh-mode))
 
