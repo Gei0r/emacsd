@@ -274,6 +274,9 @@
 (use-package make-scratch :load-path "ebed"
   :commands ebed:make-scratch)
 
+(use-package which-key)
+(which-key-mode)
+
 (server-start)
 
 (load-file "~/.emacs.d/languages.el")
