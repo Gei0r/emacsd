@@ -117,7 +117,7 @@
   (setq lsp-file-watch-threshold 20000)
   (setq lsp-semantic-tokens-enable t)
   (setq lsp-headerline-breadcrumb-enable nil)
-  (when (fboundp idle-highlight-mode) (idle-highlight-mode -1))
+  (when (fboundp 'idle-highlight-mode) (idle-highlight-mode -1))
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack))))
