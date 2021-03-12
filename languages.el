@@ -118,11 +118,18 @@
   (setq lsp-semantic-tokens-enable t)
   (setq lsp-headerline-breadcrumb-enable nil)
   (when (fboundp 'idle-highlight-mode) (idle-highlight-mode -1))
+
+  ;; To enable verbose logging in buffer *clangd-stderr*:
+  ;; (require 'lsp-clangd)
+  ;; (add-to-list 'lsp-clients-clangd-args "-log=verbose")
+
   :bind
   ((:map lsp-mode-map (("<f2>" . xref-find-definitions)
                        ("M-<left>" . xref-pop-marker-stack))))
-  :hook ((c-mode c++-mode) . lsp)
   )
+(use-package ebed-hackbrett-config :load-path "hackbrettConfig"
+  :hook ((c-mode c++-mode) . ebed:hackbrett-config-init))
+
 (use-package lsp-ui
   :commands lsp-ui-mode
   :config
