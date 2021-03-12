@@ -1846,13 +1846,13 @@ line will be searched beginning at point."
     (nreverse entries)))
 
 (eval-when-compile
-  (require 'cl))
+  (require 'cl-lib))
 (require 'cl-macs)
 ;;
 ;; topological sort, see
 ;; http://rosettacode.org/wiki/Topological_sort#Common_Lisp
 ;;
-(defun* cq-topological-sort (graph &key (test 'eql))
+(cl-defun cq-topological-sort (graph &key (test 'eql))
   "Graph is an association list whose keys are objects and whose
 values are lists of objects on which the corresponding key depends.
 Test is used to compare elements, and should be a suitable test for
