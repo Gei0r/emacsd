@@ -194,60 +194,6 @@
   (w32-shell-execute "open" cq-browser (cq-set-authentication url))
 )
 
-;; (defun xx ()
-;;   (interactive)
-;;   (let ((url (cq-set-authentication
-;;               (format cq-template-query-pr-by-cfx "CFX00199831")))
-;;         (url-using-proxy nil)
-;;         (url-proxy-services nil)
-;;         (url-cookie-trusted-urls '("^https?://"))
-;;         (url-request-method "GET")
-;;         (url-request-extra-headers
-;;          `(("Content-Type" . "application/json; charset=UTF-8")
-;;            ("Authorization" . ,(concat "Basic "
-;;                                        (base64-encode-string
-;;                                         (concat cq-auth-user ":" cq-auth-pass))))
-;;            )
-;;          )
-;;         )
-;;     (url-retrieve url
-;;                   (lambda (status)
-;;                     (switch-to-buffer (current-buffer))))
-;;     )
-;;   )
-
-
-;; https://champweb.siemens.net/cqweb/oslc/?rcm.contentType=application/json
-;; https://champweb.siemens.net/cqweb/oslc/01_CHAMP/discovery
-
-;; (defun xx ()
-;;   (interactive)
-;;   (cq-search-and-open-url "CFX00199831" (format cq-template-query-pr-by-cfx-txt "CFX00199831")))
-;; https://champweb.siemens.net/cqweb/oslc/repo/01_CHAMP/db/CFX/record/?oslc_cm.query=CFXID="SP_P00005083"&loginId=AD001%5Cbw1hahs0&password=Astoria%2304&rcm.type=CFXRequest
-;; https://champweb.siemens.net/cqweb/oslc/repo/01_CHAMP/db/CFX/record/?oslc_cm.query=CFXID="SP_P00005083"&rcm.type=CFXRequest
-
-;; (let ((url "https://champweb.siemens.net/cqweb/oslc/repo/01_CHAMP/db/CFX/record/?oslc_cm.query=CFXID=\"SP_P00005083\"&rcm.type=CFXRequest")
-;;       (url-using-proxy nil)
-;;       (url-proxy-services nil)
-;;       (url-debug t))
-;;   (url-retrieve-synchronously (cq-set-authentication url) 'no-silent))
-
-(defun xx ()
-  (interactive)
-  (let* ((url "https://champweb.siemens.net/cqweb/restapi/01_CHAMP/CFX/RECORD/CFX00186135?format=XML&loginId=AD001%5Cbw1hahs0&password=Astoria%2308&noframes=true")
-        (url-using-proxy nil)
-        (url-proxy-services nil)
-        (url-debug t)
-        (buf (url-retrieve-synchronously (cq-set-authentication url) 'no-silent)))
-    (switch-to-buffer buf)
-    (when (not (null buf))
-      (with-current-buffer buf
-        ;;(switch-to-buffer buf)
-        (re-search-forward "^$" nil 'move)
-        (setq xml (xml-parse-region (point) (point-max)))
-        (switch-to-buffer (get-buffer-create "*result*"))
-        (xml-print xml)))))
-
 (defun cq-search-real-id (pr url)
   "If SP_P or GNATS search PR and open via search result."
   (let* ((url-using-proxy nil)
