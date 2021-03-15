@@ -89,6 +89,7 @@
 (setq ring-bell-function 'my-bell-function)
 
 (define-key global-map (kbd "C-j") nil)
+(define-key global-map (kbd "C-d") nil)
 
 (use-package naquadah-theme)
 (load-theme 'naquadah t)
@@ -175,11 +176,11 @@
   :bind (("C-S-<up>" . er/expand-region)))
   
 (use-package eshell
-  :bind (("C-e" . eshell))
+  :bind (("C-d e" . eshell))
   :config
     (setq eshell-scroll-to-bottom-on-input 'all))
 (use-package ebed-eshell-here :load-path "ebed"
-  :bind (("C-S-e" . ebed:eshell-here)))
+  :bind (("C-d C-e" . ebed:eshell-here)))
 
 (use-package bm 
   :bind (("C-j n" . bm-next) ("C-j p" . bm-previous) ("C-j s" . bm-toggle))
@@ -218,7 +219,7 @@
   ("<S-return>" . ebed:newline-with-semicolon))
 
 (use-package ebed-clearcase :load-path "ebed"
-  :bind ("C-w" . ebed:cc-hijack-file-in-buffer))
+  :bind ("C-d w" . ebed:cc-hijack-file-in-buffer))
 
 (use-package flycheck
   :hook ((c++-mode c-mode) . (lambda () (flycheck-mode)

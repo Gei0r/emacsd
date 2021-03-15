@@ -106,7 +106,6 @@
 (use-package lsp-mode
   :commands lsp
   :init
-  (define-key global-map (kbd "C-d") nil)
   (define-key c++-mode-map (kbd "C-d") nil)
   (setq lsp-keymap-prefix "C-d l")
   :config
