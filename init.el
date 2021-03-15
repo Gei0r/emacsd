@@ -215,7 +215,6 @@
 (use-package ebed-misc :load-path "ebed"
   :commands (ebed:insert-path ebed:printHash ebed:remove-dos-eol)
   :bind
-  ("<f4>" . ebed:find-other-file)
   ("<S-return>" . ebed:newline-with-semicolon))
 
 (use-package ebed-clearcase :load-path "ebed"

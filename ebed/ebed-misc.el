@@ -32,56 +32,6 @@
     (insert ";"))
   (funcall indent-line-function))
 
-
-(use-package dash)
-
-(defun ebed:find-other-file-from-list(l1 l2)
-  "Internal function.
-
-  L1: first list of extensions.
-  L2: second list of extensions."
-  (interactive)
-
-  (let (ext file-name-no-ext (target-file nil))
-
-    (setq ext
-          (-first (lambda(x)(string-suffix-p x buffer-file-name)) l1))
-    (when ext
-      ;; currently opened file has suffix "ext" from l1
-
-      (setq file-name-no-ext
-            (substring
-             (file-name-nondirectory buffer-file-name)
-             0
-             (- (length ext))))
-
-      ;; try to find a corresponding file with suffix from l2
-      (setq ext
-            (-first
-             (lambda(x)(file-exists-p (concat file-name-no-ext x)))
-             l2))
-      (setq target-file (concat file-name-no-ext ext)))
-
-    ;; return value is target-file
-    target-file
-    ))
-
-(defun ebed:find-other-file()
-  "If current buffer is a .cpp file, open the corresponding .h file and vice
-  versa"
-  (interactive)
-
-  (let ((impl-exts '(".cpp" ".c" ".cxx" "_asm.asm"))
-        (hdr-exts  '(".h" ".hpp" ".hxx" "_h.asm"))
-        tmp)
-
-    (setq tmp (ebed:find-other-file-from-list impl-exts hdr-exts))
-    (if tmp (find-file tmp)
-      (setq tmp (ebed:find-other-file-from-list hdr-exts impl-exts))
-      (if tmp (find-file tmp)
-        (message "No other file found")
-        nil))))
-
 (defun ebed:insert-path()
   (interactive)
   (let ((to-paste (current-kill 0 t)))
@@ -90,8 +40,6 @@
 
 (defun ebed:printHash(hash)
   (maphash (lambda (key value) (message (format "%s -> %s" key value))) hash))
-
-
 
 (defun ebed:remove-dos-eol ()
   "Do not show ^M in files containing mixed UNIX and DOS line endings."
