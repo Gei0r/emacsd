@@ -201,6 +201,8 @@
 
 (use-package multiple-cursors
   :init (global-unset-key (kbd "M-<down-mouse-1>"))
+  :config
+  (setq mc/always-run-for-all t)
   :bind
   ("C-l" . mc/edit-lines)
   ("M-<mouse-1>" . mc/add-cursor-on-click))
