@@ -2,8 +2,10 @@
 # name: oldpath
 # key: oldpath
 # --
+@echo off
+
 set OLDPATH=%PATH%
-set PATH=%SystemRoot%;%SystemRoot%\system32;
+set PATH=%SystemRoot%;%SystemRoot%\system32;%~dp0${1:toolchain}
 
 $0
 
