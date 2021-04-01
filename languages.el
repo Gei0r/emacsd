@@ -146,8 +146,6 @@
   (setq lsp-ui-doc-position 'top)
   (setq lsp-ui-doc-include-signature t))
 
-(use-package company-lsp :commands company-lsp)
-
 (add-to-list 'auto-mode-alist '("\\.do\\'" . sh-mode))
 
 (use-package tvfile :load-path "hs"
