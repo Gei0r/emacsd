@@ -279,6 +279,10 @@
 (use-package which-key)
 (which-key-mode)
 
+(use-package crdt
+  :quelpa (crdt :fetcher git
+                :url "https://code.librehq.com/qhong/crdt.el.git"))
+
 (server-start)
 
 (load-file "~/.emacs.d/languages.el")
