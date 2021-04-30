@@ -28,10 +28,6 @@
 (use-package idle-highlight-mode
   :custom-face (idle-highlight ((t (:background "MediumPurple4")))))
 
-(use-package column-marker :load-path "ebed"
-  :commands column-marker-1
-  :custom-face (column-marker-1 ((t (:background "#782121")))))
-
 (use-package git-gutter+ :commands git-gutter+-mode)
 
 ;; Use monospaced font faces in current buffer
@@ -43,7 +39,7 @@
      (setq buffer-face-mode-face '(:family "Inconsolata" :height 180)))
    
    (buffer-face-mode)
-   (column-marker-1 79)
+   (display-fill-column-indicator-mode)
    (show-paren-mode)
    (auto-fill-mode)
    (idle-highlight-mode)
