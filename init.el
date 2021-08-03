@@ -254,7 +254,7 @@
   :bind* (("C-x i" . ebed:copyBibentry)
           ("C-x I" . ebed:gotoBibentry)
           ("C-j i" . ebed:helmBib))
-  :config (setq ebed:bibDatabase "D:/User/Adrian/Literaturdatenbank"))
+  :config (setq ebed:bibDatabase "D:/Adrian/Programmierung/bibdata"))
 
 (use-package git-gutter+
   :config
