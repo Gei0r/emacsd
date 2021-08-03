@@ -4,7 +4,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
-(if (getenv "CLEARCASE_GROUPS") (setq isSiemens t) (setq isSiemens nil))
+(if (getenv "OneDriveCommercial") (setq isSiemens t) (setq isSiemens nil))
 ;;(when isSiemens
 ;;  (setq url-using-proxy nil)
 ;;  (setq url-proxy-services
