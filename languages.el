@@ -178,7 +178,9 @@
   :commands ebed:flycheck-codecheck-enable-in-this-buffer)
 
 (use-package yaml-mode
-  :mode ("\\.yml" "\\.yaml"))
+  :mode ("\\.yml" "\\.yaml")
+  :config
+  (add-hook 'yaml-mode-hook 'yas-minor-mode))
 
 (use-package cmake-mode
   :mode ("CMakeLists.txt"))
