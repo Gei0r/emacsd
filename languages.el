@@ -21,6 +21,20 @@
   (add-hook 'org-mode-hook 'auto-fill-mode)
   (add-hook 'org-mode-hook 'column-number-mode))
 
+(flycheck-define-checker docbuilder
+  "Syntax checker for DocBuilder files"
+  :command ("DocBuilder" "--syntax-only" source)
+  :error-patterns
+  ((error line-start (file-name) ":" line ":" column ": " (message) line-end))
+  :modes org-mode
+  )
+
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (string= (file-name-extension buffer-file-name) "docbuilder")
+              (flycheck-select-checker 'docbuilder)
+              (flycheck-mode))))
+
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
 (use-package web-mode
