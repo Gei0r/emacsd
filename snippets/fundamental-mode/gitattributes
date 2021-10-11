@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: gitattributes
+# key: gitattributes
+# --
+# Effectively disables autocrlf for this repository.
+* -text

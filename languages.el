@@ -171,3 +171,5 @@
 
 (use-package cmake-font-lock
   :hook ((cmake-mode) . cmake-font-lock-activate))
+
+(use-package powershell)
