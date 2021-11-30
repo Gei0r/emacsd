@@ -1,11 +1,10 @@
 # -*- mode: snippet -*-
-# Suppress for PCLint
-# name: sup
-# key: sup
+# name: suppress for code inspector
+# key: suc
 # --
 /**
  * @check `(format-time-string "%Y%m%d")` ebed (${1:rule})
  * $1 ${2:ruleText}
  *   --> ${3:reason}
  */
-//lint -e{$1}
+// SUPPRESS $1

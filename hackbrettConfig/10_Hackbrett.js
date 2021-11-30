@@ -53,6 +53,8 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
             isystem: [
                 "Hackbrett/_inc", "Hackbrett/_inc/appl", "Hackbrett/_inc/devl",
                 "Hackbrett/_tools/386/include",
+                "Hackbrett/_tools/386/include/iostl",
+                "Hackbrett/_tools/386/include/std",
                 "Hackbrett/_inc/ds3_software_mirror/_inc",
                 "Hackbrett/_section/ds3/_inc",
             ],

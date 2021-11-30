@@ -53,6 +53,11 @@ the file's .cpp/.c/.h suffix with .cck."
           "CHECKER_VIOLATION:.*"
           (file-name-nondirectory (buffer-file-name file-buffer))
           ":\\([0-9]+\\): \\(.*\\)"))
+        (pclint-regex
+         (concat
+          "PCLINT_VIOLATION:.*"
+          (file-name-nondirectory (buffer-file-name file-buffer))
+          ":\\([0-9]+\\) \\((\\([0-9]+\\)) \\[\\([^]]+\\)\\] \\(.*\\)\\)"))
         (num-error 0)
         (num-recommendation 0)
         (num-suppress 0))
@@ -78,7 +83,32 @@ the file's .cpp/.c/.h suffix with .cck."
             ;; push a new flycheck error to the end of the error list
             (push (flycheck-error-new-at line nil errorlevel descr
                                          :buffer file-buffer)
-                  error-list)))))
+                  error-list))))
+      (beginning-of-buffer)
+      (while (re-search-forward pclint-regex nil t)
+        ;; found another PCLINT_VIOLATION line
+        (let* ((line (string-to-number (match-string 1)))
+               (msg (match-string 2))
+               (rule (string-to-number (match-string 3)))
+               (type (match-string 4))
+               (descr (match-string 5))
+               (errorlevel 'error))
+          (if (or (string= type "note") (string= type "info"))
+              (progn
+                (setq errorlevel 'warning)
+                (setq num-recommendation (+ num-recommendation 1)))
+            (progn
+              (setq errorlevel 'error)
+              (setq num-error (+ num-error 1))
+              ))
+
+          (when errorlevel
+            ;; push a new flycheck error to the end of the error list
+            (push (flycheck-error-new-at line nil errorlevel msg
+                                         :buffer file-buffer)
+                                         error-list))
+
+      )))
 
     ;; because we always pushed to the front of error list, the list is in
     ;; reverse order. We reverse again.
