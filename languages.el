@@ -189,3 +189,7 @@
   :hook ((cmake-mode) . cmake-font-lock-activate))
 
 (use-package powershell)
+
+(use-package rustic
+  :config
+  (setq rustic-format-trigger 'on-save))
