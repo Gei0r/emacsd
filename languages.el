@@ -3,6 +3,11 @@
   (interactive)
   (org-table-map-tables 'org-table-align))
 
+(defface hi-docbuilder-todo
+  '( (t (:background "gold"
+                           :foreground "firebrick4"
+                           :weight bold))) "Highlight face")
+
 (use-package org
   :mode (("\\.org$" . org-mode) ("\\.docbuilder$" . org-mode))
   :bind
@@ -19,7 +24,11 @@
   (setq org-startup-indented t)
   (setq org-support-shift-select 'always)
   (add-hook 'org-mode-hook 'auto-fill-mode)
-  (add-hook 'org-mode-hook 'column-number-mode))
+  (add-hook 'org-mode-hook 'column-number-mode)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (highlight-lines-matching-regexp
+               "<todo " 'hi-docbuilder-todo))))
 
 (flycheck-define-checker docbuilder
   "Syntax checker for DocBuilder files"
