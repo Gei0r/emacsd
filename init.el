@@ -152,7 +152,7 @@
   (add-hook 'compilation-filter-hook
             #'endless/colorize-compilation))
 
-(use-package helm-ls-git :bind (("C-S-o" . helm-ls-git-ls)))
+(use-package helm-ls-git :bind (("C-S-o" . helm-ls-git)))
 
 (use-package ebed-helm-buffers-persistent-kill :load-path "ebed"
   :bind (:map helm-map ("<f12>" . ebed:helm-buffers-persistent-kill)))
