@@ -202,3 +202,7 @@
 (use-package rustic
   :config
   (setq rustic-format-trigger 'on-save))
+
+(use-package markdown-mode
+  :mode ("\\.md" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
