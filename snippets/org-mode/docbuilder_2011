@@ -1,0 +1,125 @@
+# -*- mode: snippet -*-
+# name: docbuilder_2011
+# key: docbuilder_2011
+# --
+<settings>
+
+  <glossary>
+    <file>path/Glossary.xml</file>       <!-- TODO: Adjust path -->
+    <linkStyle>BegriffAbk</linkStyle>
+  </glossary>
+  <abbreviations>
+    <file>path/Abbreviations.xml</file>  <!-- TODO: Adjust path -->
+    <linkStyle>BegriffAbk</linkStyle>
+  </abbreviations>
+
+  <bib>
+    <style>bracket</style>
+    <datafile>path/bibdata</datafile>    <!-- TODO: Adjust path -->
+    <outputUsageReport>true</outputUsageReport>
+  </bib>
+
+  <RequirementTracing>
+    <DocumentId>TODO</DocumentId>
+    <Component>TODO</Component>
+    <InputFile>todo=path/todo</InputFile>
+    <Separator>-</Separator>
+  </RequirementTracing>
+
+</settings>
+
+<coverpage_authors/>
+
+* Inhaltsverzeichnis[noNumber, pageBreakBefore]
+<toc/>
+
+* Einleitung [pageBreakBefore]
+** Änderungen
+
+*** Änderungsübersicht
+<changeOverview_2011>
+  <change v="-" ssn="1" km="R_4.xx.xx" date="<erstelldatum/>" author="M. Mustermann">
+    siehe <a href="#ch_Änderungen"/>
+  </change>
+</changeOverview_2011>
+
+*** Begutachtete Versionen
+
+<assuredVersions />
+
+*** Änderungen
+<changes_2011>
+  <reason>Datei neu angelegt</reason>
+  <cfx nr="00427878"
+       title="K32+ setzt das B-Bit ('Big') für Stack Segmente nicht">
+    Kurze Beschreibung des Fehlers (optional)
+  </cfx>
+  <change section="alle" nolink="true">
+    Datei angelegt
+  </change>
+</changes_2011>
+
+** Reviewdokumentation
+
+<reviewdoc_2011 stand="A" reviewDis="A6Z1231231232/PM2/000/-">
+  <reviewer name="L. Listenreich" role="EXPERTE">Staub ergründen</reviewer>
+  <reviewer name="W. Parry" />
+  <reviewer name="I. Byrnison" role="EISBÄR" />
+  <reviewer name="S. Pekkala" role="HEXE">
+    Fliegen
+
+    Zukunft vorhersagen
+  </reviewer>
+  <!-- optional: <reviewAbweichungen>keine</reviewAbweichungen> -->
+</reviewdoc_2011>
+
+** Zweck
+
+<todo m="Zweck eintragen"/>
+
+** Referenzen
+*** Normen und Richtlinien
+<!-- Das Ausgabejahr (oder ggf. eine andere Art der Versionskennzeichnung) ist
+     stets anzugeben. -->
+
+<bibliography>
+  <entry id="DIN:EN:50128:2011/A2:2020"/>
+</bibliography>
+
+*** Input-Dokumente
+<!-- Versionsangaben sind bei Input-Dokumenten zwingend vorgeschrieben -->
+
+<bibliography>
+
+</bibliography>
+
+*** Mitgeltende Dokumente
+<!--
+  Bei mitgeltenden Dokumenten wird die Version meistens nicht mit angezogen.
+-->
+
+Die Stände der Dokumente, die ohne festen Stand (Stand „*“) referenziert
+werden, werden durch TODO festgelegt.
+
+<bibliography>
+
+</bibliography>
+
+*** Weitere Dokumente
+
+<!--
+  Bei weiteren Dokumenten werden Versionsnummern nicht angezogen. Mit einem
+  Verweis auf ein Dokument ohne Nennung der Versionsnummer wird somit immer die
+  aktuell freigegebene Version angezogen.
+-->
+
+<bibliography>
+  <entry id="QM:Glossar">Glossar_SIMIS_FM</entry>
+  <entry id="QM:DescriptionDocTemplate"/>
+</bibliography>
+** Glossar
+Verwendete Begriffe und Abkürzungen sind in diesem Dokument wie folgt
+hervorgehoben: <span style="BegriffAbk">Beispiel</span>.
+Allgemeine Begriffe sind im [Glossar_SIMIS_FM] aufgeführt.
+
+<glossary_abbreviations />
