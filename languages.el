@@ -70,6 +70,12 @@
     (add-to-list 'c-offsets-alist '(case-label . 4))
     (ebed:activate-pretty-c-block-comments))
 
+(use-package origami
+  :bind
+  ((:map origami-mode-map (("<backtab>" . origami-recursively-toggle-node))))
+  )
+(global-origami-mode)
+
 (use-package asm86-mode
   :quelpa (asm86-mode :fetcher github :repo "gei0r/asm86-mode")
   :mode "\\.asm"
