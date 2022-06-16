@@ -205,4 +205,12 @@
 
 (use-package markdown-mode
   :mode ("\\.md" . gfm-mode)
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "multimarkdown")
+  :config
+  (add-hook 'gfm-mode-hook 'auto-fill-mode)
+  (add-hook 'gfm-mode-hook 'ws-butler-mode)
+  (add-hook 'gfm-mode-hook 'column-number-mode)
+  (setq markdown-asymmetric-header t)
+  (setq markdown-header-scaling t)
+  (setq markdown-list-indent-width 2)
+  )
