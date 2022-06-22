@@ -518,9 +518,9 @@ results."
 (defconst tvfile-font-lock-alist
   `(
     ;; Televist Header
-    ("\\(^1\\.[0-9]+\\(:[0-9]+\\)?<[0-9a-fx]+> \\)" 1 'tv-channel1)
-    ("\\(^2\\.[0-9]+\\(:[0-9]+\\)?<[0-9a-fx]+> \\)" 1 'tv-channel2)
-    ("\\(^3\\.[0-9]+\\(:[0-9]+\\)?<[0-9a-fx]+> \\)" 1 'tv-channel3)
+    ("\\(^1\\.[^<]+<[0-9a-fx]+> \\)" 1 'tv-channel1)
+    ("\\(^2\\.[^<]+<[0-9a-fx]+> \\)" 1 'tv-channel2)
+    ("\\(^3\\.[^<]+<[0-9a-fx]+> \\)" 1 'tv-channel3)
 
     ;; Topologie
     ("\\(^[0-9]+\\.[0-9]+ [0-9]+ \\[.*?\\]\\(<[0-9a-fx]+>\\|Unilink>\\) \\)" 1 'tv-channel1)
