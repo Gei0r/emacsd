@@ -163,7 +163,35 @@
 (use-package lsp-ui
   :commands lsp-ui-mode
   :config
-  (setq lsp-ui-sideline-enable nil)
+  ;; (setq lsp-ui-sideline-enable t)
+
+  ;; the following three functions fix wrapping the sideline view, taken from
+  ;; https://github.com/emacs-lsp/lsp-ui/issues/184#issuecomment-1161554461
+  (defun lsp-ui-sideline--window-width ()
+    (- (window-max-chars-per-line)
+       (lsp-ui-sideline--margin-width)
+       (or (and (>= emacs-major-version 27)
+                ;; We still need this number when calculating available space
+                ;; even with emacs >= 27
+                (lsp-ui-util-line-number-display-width))
+           0)))
+
+  (defun lsp-ui-sideline--display-all-info (list-infos tag bol eol)
+    (when (and (lsp-ui-sideline--valid-tag-p tag 'line)
+               (not (lsp-ui-sideline--stop-p)))
+      (let ((inhibit-modification-hooks t)
+            (win-width (lsp-ui-sideline--window-width))
+            ;; sort by bounds
+            (list-infos (--sort (< (caadr it) (caadr other)) list-infos)))
+        (lsp-ui-sideline--delete-kind 'info)
+        (--each list-infos
+          (-let (((symbol bounds info) it))
+            (lsp-ui-sideline--push-info win-width symbol bounds info bol eol))))))
+
+  (defun lsp-ui-sideline--align (&rest lengths)
+    (list (* (window-font-width)
+             (+ (apply '+ lengths) (if (display-graphic-p) 1 2)))))
+
   (advice-add 'lsp-ui-doc--extract-marked-string :around
      (lambda (original marked-string &optional language)
        "Beautify text in side window (remove ^M and set correct encoding)"
@@ -172,6 +200,7 @@
                        (s-trim (decode-coding-string marked-string 'latin-1)))
                       (t marked-string))
                 language)))
+  (setq lsp-ui-doc-show-with-cursor t)
   (setq lsp-ui-doc-position 'top)
   (setq lsp-ui-doc-include-signature t))
 
@@ -207,7 +236,12 @@
 
 (use-package rustic
   :config
-  (setq rustic-format-trigger 'on-save))
+  (setq rustic-format-trigger 'on-save)
+  (setq rustic-format-on-save-method 'rustic-format-buffer)
+  (setq lsp-rust-analyzer-server-display-inlay-hints t)
+  (setq rustic-spinner-type 'rotating-line) ; doesn't do anything unfortunately
+  (setq lsp-rust-analyzer-cargo-watch-command "clippy")
+  )
 
 (use-package markdown-mode
   :mode ("\\.md" . gfm-mode)
