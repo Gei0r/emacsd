@@ -214,6 +214,7 @@
   :init (setq markdown-command "multimarkdown")
   :config
   (add-hook 'gfm-mode-hook 'auto-fill-mode)
+  (add-hook 'gfm-mode-hook 'yas-minor-mode)
   (add-hook 'gfm-mode-hook 'ws-butler-mode)
   (add-hook 'gfm-mode-hook 'column-number-mode)
   (setq markdown-asymmetric-header t)
