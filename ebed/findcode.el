@@ -34,8 +34,7 @@
       (insert "Which map file?\n\n")
       (--each-indexed map-filename
         (progn
-          (string-match "\\([^/]+\\)+$" it)
-          (insert (number-to-string it-index) " " (match-string 1 it) "\n")))
+          (insert (number-to-string it-index) " " it "\n")))
       (setq map-file-number (string-to-number(read-string "Which map file? ")))
       (kill-buffer temp-buffer))
 
