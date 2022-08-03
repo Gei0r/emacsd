@@ -196,7 +196,10 @@
 
 (use-package magit :bind (("C-x v g" . magit-status)))
 
-(use-package undo-tree)
+(use-package undo-tree
+  :config
+  (setq undo-tree-auto-save-history nil)
+  )
 (global-undo-tree-mode)
 
 (use-package comment-dwim-2 :bind* (("M-," . comment-dwim-2)))
