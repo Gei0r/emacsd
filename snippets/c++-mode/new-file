@@ -7,8 +7,6 @@
  *
  * @author ebed Adrian Ebeling <adrian.ebeling@siemens.com>
  *
- * @rev
- *
  * ${1:Description}
  *
  * HISTORY
@@ -16,8 +14,6 @@
  *
  * Copyright (C) Siemens Mobility GmbH `(format-time-string "%Y")` All Rights Reserved
  */
-
-#pragma ident "<@(#) >"
 
 #include <system32.h>
 #include <operatoren.h>

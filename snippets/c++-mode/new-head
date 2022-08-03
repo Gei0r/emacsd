@@ -7,8 +7,6 @@
  *
  * @author ebed Adrian Ebeling <adrian.ebeling@siemens.com>
  *
- * @rev
- *
  * ${1:Description}
  *
  * HISTORY
@@ -19,8 +17,6 @@
 
 #ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H}
 #define $1
-
-#pragma ident "<@(#) >"
 
 #include <system32.h>
 
