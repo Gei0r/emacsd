@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: surround-org-source
+# binding: C-t o
+# expand-env : ((yas-wrap-around-region 1))
+# --
+#+BEGIN_SRC ${1:language}
+$0
+#+END_SRC
