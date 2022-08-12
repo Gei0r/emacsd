@@ -77,12 +77,24 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
             incdirs: ["Hackbrett/_section/comm/Streams/_inc"]
         },
 
+        "Hackbrett/_section/RamBackgroundCheck": {
+            incdirs: ["Hackbrett/_section/RamBackgroundCheck/_src"],
+            flags: ["-DSLLREPLACER_NO_DS3"],
+        },
+
         "Hackbrett/_section/kernel32": {
             incdirs: [
                 "Hackbrett/_section/kernel32/_inc",
                 "Hackbrett/_section/kernel32/tasker/taskercontrol/_src",
             ],
             root: "Hackbrett/_section/kernel32"
+        },
+
+        "Hackbrett/_section/cu_test": {
+            incdirs: [
+                "Hackbrett/_section/kernel32/_inc",
+                "Hackbrett/_section/kernel32/copied_sources",
+            ]
         },
 
         "Hackbrett/_section/kernel32/aktualisierung": {

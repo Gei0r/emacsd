@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: oldpath-docbuilder
+# key: oldpath-docbuilder
+# --
+@echo off
+
+set OLDPATH=%PATH%
+set PATH=%SystemRoot%;%SystemRoot%\system32;%SystemRoot%\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\inPuncto\System32;%~dp0DocBuilder
+
+$0
+
+set PATH=%OLDPATH%

@@ -152,7 +152,7 @@
   (add-hook 'compilation-filter-hook
             #'endless/colorize-compilation))
 
-(use-package helm-ls-git :bind (("C-S-o" . helm-ls-git-ls)))
+(use-package helm-ls-git :bind (("C-S-o" . helm-ls-git)))
 
 (use-package ebed-helm-buffers-persistent-kill :load-path "ebed"
   :bind (:map helm-map ("<f12>" . ebed:helm-buffers-persistent-kill)))
@@ -196,7 +196,10 @@
 
 (use-package magit :bind (("C-x v g" . magit-status)))
 
-(use-package undo-tree)
+(use-package undo-tree
+  :config
+  (setq undo-tree-auto-save-history nil)
+  )
 (global-undo-tree-mode)
 
 (use-package comment-dwim-2 :bind* (("M-," . comment-dwim-2)))
@@ -256,7 +259,10 @@
   :bind* (("C-x i" . ebed:copyBibentry)
           ("C-x I" . ebed:gotoBibentry)
           ("C-j i" . ebed:helmBib))
-  :config (setq ebed:bibDatabase "D:/Adrian/Programmierung/bibdata"))
+  :config
+  (setq ebed:bibDatabase
+        (or (getenv "BIBDATA") "D:/Adrian/Programmierung/bibdata"))
+  )
 
 (use-package git-gutter+
   :config

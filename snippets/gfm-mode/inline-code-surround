@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: inline-code-surround
+# binding: C-t i
+# expand-env : ((yas-wrap-around-region 1))
+# --
+\`$0\`
