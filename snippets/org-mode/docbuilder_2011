@@ -62,10 +62,16 @@
 ** Reviewdokumentation
 
 <reviewdoc_2011 stand="A" reviewDis="A6Z1231231232/PM2/000/-">
-  <reviewer name="L. Listenreich" role="EXPERTE">Staub ergründen</reviewer>
-  <reviewer name="W. Parry" />
-  <reviewer name="I. Byrnison" role="EISBÄR" />
-  <reviewer name="S. Pekkala" role="HEXE">
+  <reviewer name="L. Listenreich" role="EXPERTE" org="SMO RI R&D DF4"
+            sap="LISTENREICH_LYR" date="202x-xx-xx">
+    Staub ergründen
+  </reviewer>
+  <reviewer name="W. Parry" org="SMO RI R&D F" sap="PARRY_WIL"
+            date="202x-xx-xx"/>
+  <reviewer name="I. Byrnison" role="EISBÄR" org="SMO RI R&D DF 2"
+            sap="BYRNISON_IOR" date="202x-xx-xx" />
+  <reviewer name="S. Pekkala" role="HEXE" org="SMO RI R&D F"
+            sap="PEKKALA_SER" date="202x-xx-xx">
     Fliegen
 
     Zukunft vorhersagen
