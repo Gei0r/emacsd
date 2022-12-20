@@ -238,9 +238,10 @@
   :config
   (setq rustic-format-trigger 'on-save)
   (setq rustic-format-on-save-method 'rustic-format-buffer)
-  (setq lsp-rust-analyzer-server-display-inlay-hints t)
+  (setq lsp-rust-analyzer-server-display-inlay-hints nil)
   (setq rustic-spinner-type 'rotating-line) ; doesn't do anything unfortunately
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
+  (add-hook 'rustic-mode-hook (lambda () (setq-local fill-column 100)))
   )
 
 (use-package markdown-mode
