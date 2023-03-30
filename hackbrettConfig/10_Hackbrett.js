@@ -87,6 +87,7 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 "Hackbrett/_section/kernel32/_inc",
                 "Hackbrett/_section/kernel32/tasker/taskercontrol/_src",
             ],
+            defines: { "INSIDE_KERNEL32": "" },
             root: "Hackbrett/_section/kernel32"
         },
 
