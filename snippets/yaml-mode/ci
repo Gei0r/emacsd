@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: ci
+# key: ci
+# --
+include:
+ - project: 'umatch/general-tools/ypackage'
+   ref: master
+   file: '/templates/DownloadYPackage.gitlab-ci.yml'
+
+build:
+  extends: .ypackage-win
+  image: mcr.microsoft.com/windows/servercore:ltsc2022
+  tags: [WINDOWS-DOCKER-LTSC2022]
+  script:
+    - $0
+  artifacts:
+    name: "$CI_COMMIT_SHORT_SHA-$CI_JOB_NAME"
+    paths:
+      -
+publish:
+  extends: .ypackage-lin
+  image: alpine:latest
+  tags: [DOCKER]
+  stage: deploy
+  script:
+    - yp publish
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /(.*_)?(v|R_)\d{1,3}(\.\d{1,3}(\.\d{1,3}(\.\d{1,3})?)?)?$/'
+    - when: manual
