@@ -1,6 +1,8 @@
 (define-key global-map (kbd "C-r") 'isearch-forward)
 (define-key global-map (kbd "C-S-r") 'isearch-backward)
 
+(define-key global-map (kbd "M-j") (lambda() (interactive) (insert "“")))
+(define-key global-map (kbd "M-k") (lambda() (interactive) (insert "”")))
 (define-key global-map (kbd "M-n") (lambda() (interactive) (insert "„")))
 (define-key global-map (kbd "M-m") (lambda() (interactive) (insert "“")))
 

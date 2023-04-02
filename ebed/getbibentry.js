@@ -44,6 +44,37 @@ function sapid(argv, builder) {
         process.stdout.write("(no sapid)");
     process.stdout.write(data.sapid.replace(/\/.*/, ""));
 }
+function saplink(argv, build) {
+    let data = build.getDocData(argv[0]);
+    if (data === undefined) {
+        process.stdout.write("(invalid entry)");
+        return;
+    }
+    if (data.sapid === undefined) {
+        process.stdout.write("(no sapid)");
+        return;
+    }
+    let match = data.sapid.match(/(A6Z\d{11})\/(PM1|PM2|EN1)\/(\w{3})\/(\d{2}|\w|\*|-)/);
+    if (!match) {
+        process.stdout.write("(invalid sapid)");
+        return;
+    }
+    const document = match[1];
+    const typ = match[2];
+    const part = match[3];
+    const version = match[4];
+    const dokopt = version == '*' ? "A" : "T";
+    process.stdout.write(`https://p25.transportation.siemens.com/sap/bc/bsp` +
+        `/sie/ts_pl03_anonym/default.htm?` +
+        `dokar=${typ}&doknr=${document}&` +
+        `dokvr=${version}&` +
+        `doktl=${part}&` +
+        `filenam=&` +
+        `dokopt=${dokopt}&` +
+        `fileopt=1` +
+        `&folddisp=N&` +
+        `ph_id=`);
+}
 function pos(argv, builder) {
     if (argv.length < 1) {
         throw new Error('Usage');
@@ -67,7 +98,9 @@ function main() {
                 (process.argv[2] !== "--info" &&
                     process.argv[2] !== "--pos" &&
                     process.argv[2] !== "--all" &&
-                    process.argv[2] !== "--sapid")) {
+                    process.argv[2] !== "--sapid" &&
+                    process.argv[2] !== "--saplink" &&
+                    true)) {
                 throw new Error('Usage');
             }
             let command = process.argv[2];
@@ -84,6 +117,8 @@ function main() {
                 all(builder);
             else if (command == "--sapid")
                 sapid(restArgs, builder);
+            else if (command == "--saplink")
+                saplink(restArgs, builder);
         }
         catch (e) {
             if (e.message === "Usage") {

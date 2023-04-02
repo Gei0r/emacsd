@@ -238,9 +238,10 @@
   :config
   (setq rustic-format-trigger 'on-save)
   (setq rustic-format-on-save-method 'rustic-format-buffer)
-  (setq lsp-rust-analyzer-server-display-inlay-hints t)
+  (setq lsp-rust-analyzer-server-display-inlay-hints nil)
   (setq rustic-spinner-type 'rotating-line) ; doesn't do anything unfortunately
   (setq lsp-rust-analyzer-cargo-watch-command "clippy")
+  (add-hook 'rustic-mode-hook (lambda () (setq-local fill-column 100)))
   )
 
 (use-package markdown-mode
@@ -254,4 +255,28 @@
   (setq markdown-asymmetric-header t)
   (setq markdown-header-scaling t)
   (setq markdown-list-indent-width 2)
+  )
+
+(defun plantuml-switch-back-after-preview (orig-fun &rest args)
+  "Store the currently active buffer, call the original function, then switch
+   back to the original buffer.
+
+   Meant as an advice around plantuml-update-preview-buffer, which switches the
+   buffer (I don't like this)"
+  (let ((editing-buffer (current-buffer)))
+    (apply orig-fun args) ; call original function
+    (switch-to-buffer-other-window editing-buffer)))
+
+(use-package plantuml-mode
+  :mode ("\\.plantuml" . plantuml-mode)
+  :config
+  (setq plantuml-default-exec-mode 'jar)
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  (add-hook 'after-save-hook
+            (lambda () (when (eq major-mode 'plantuml-mode)
+                         (plantuml-preview '4))))
+  (setq plantuml-indent-level 4)
+  (add-to-list 'plantuml-jar-args "-tpng" t)
+  (advice-add 'plantuml-update-preview-buffer
+              :around #'plantuml-switch-back-after-preview)
   )

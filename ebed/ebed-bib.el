@@ -72,6 +72,13 @@
     (message result)
     (kill-new result)))
 
+(defun ebed:getSaplink (&optional id)
+  (interactive)
+  (let* ((entry (if id id (ebed:getBibIdAtPoint)))
+         (result (ebed:call_getbibentryJs entry "--saplink")))
+    (message result)
+    (browse-url result)))
+
 (defun ebed:gotoBibentry (&optional id)
   (interactive)
   (let ((entry (if id id (ebed:getBibIdAtPoint)))
@@ -127,6 +134,8 @@
                        (lambda (id) (insert (ebed:getBibentry id)))
                        "Copy SAP-ID"
                        'ebed:getSapid
+                       "Get SAP link"
+                       'ebed:getSaplink
                        ))
    :buffer "*helm sync source*"))
 
