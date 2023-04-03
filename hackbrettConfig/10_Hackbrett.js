@@ -110,6 +110,12 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
             defines: { "THROW_NOTHING": "throw" }
         },
 
+        "Hackbrett/_section/SMI_Generic": {
+            incdirs: [
+                "Hackbrett/_inc/appl_ext",
+            ],
+        },
+
         "Hackbrett/_src/packager": {
             root: "Hackbrett/_src/packager",
         },
