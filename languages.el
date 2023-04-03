@@ -28,7 +28,7 @@
   (add-hook 'org-mode-hook
             (lambda ()
               (highlight-lines-matching-regexp
-               "<todo " 'hi-docbuilder-todo))))
+               "<todo" 'hi-docbuilder-todo))))
 
 (flycheck-define-checker docbuilder
   "Syntax checker for DocBuilder files"
