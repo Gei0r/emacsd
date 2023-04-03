@@ -147,9 +147,10 @@
   (setq lsp-headerline-breadcrumb-enable nil)
   (when (fboundp 'idle-highlight-mode) (idle-highlight-mode -1))
 
+  (require 'lsp-clangd)
+  (add-to-list 'lsp-clients-clangd-args "--header-insertion=never")
 
   ;; To enable verbose logging in buffer *clangd-stderr*:
-  ;; (require 'lsp-clangd)
   ;; (add-to-list 'lsp-clients-clangd-args "-log=verbose")
 
   :bind
