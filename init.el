@@ -291,6 +291,12 @@
   :quelpa (crdt :fetcher git
                 :url "https://code.librehq.com/qhong/crdt.el.git"))
 
+(use-package editorconfig
+  :ensure t
+  :config
+  (setq editorconfig-trim-whitespaces-mode 'ws-butler-mode)
+  (editorconfig-mode 1))
+
 (server-start)
 
 (load-file "~/.emacs.d/languages.el")
