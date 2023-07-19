@@ -109,7 +109,7 @@
                                            (newline-and-indent)))))))
 
 (use-package typescript-mode
-  :mode("\\.ts" "\\.tsx" "\\.js$"))
+  :mode("\\.ts" "\\.tsx" "\\.js$" "\\.mjs$"))
 
 (use-package tide
   :hook
