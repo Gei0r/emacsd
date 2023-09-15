@@ -78,6 +78,19 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
             incdirs: ["Hackbrett/_section/kernel32/_inc"]
         },
 
+        "Hackbrett/_section/comm/ECC-StdComm2/IEM": {
+            incdirs: [
+                "Hackbrett/_section/comm/ECC-StdComm/StdCommTest/_inc",
+                "Hackbrett/_section/comm/Streams/_inc",
+                "Hackbrett/_section/comm/genlib/_inc",
+                "Hackbrett/_section/comm/LTSA/_inc",
+                "Hackbrett/_section/comm/ECC-StdComm/Ethernet-M-Modul",
+                "Hackbrett/_section/comm/ECC-StdComm/serielles-M-Modul/_inc",
+                "Hackbrett/_section/comm/ECC-StdComm/Ethernet-M-Modul/_test_src",
+            ],
+            flags: ["-DCPM32_USE_CLIB"],
+        },
+
         "Hackbrett/_section/Demo": {
             incdirs: ["Hackbrett/_section/comm/Streams/_inc"]
         },
