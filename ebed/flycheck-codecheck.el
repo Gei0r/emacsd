@@ -185,7 +185,7 @@ Asynchronously runs 'xp codecheck $filename.cck' in the directory
     ebed:compile-dir (should be set to the appropriate _make subdir) and parses
     the output."
   :start 'ebed:codecheck-start
-  :enabled (lambda () (and (boundp 'ebed:flycheck-codecheck-enable)
+  :predicate (lambda () (and (boundp 'ebed:flycheck-codecheck-enable)
                            ebed:flycheck-codecheck-enable))
   :modes '(c-mode c++-mode))
 
