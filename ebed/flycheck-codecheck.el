@@ -197,7 +197,12 @@ Asynchronously runs 'xp codecheck $filename.cck' in the directory
 
 (defun ebed:flycheck-codecheck-enable-in-this-buffer ()
   (interactive)
-  (setq-local ebed:flycheck-codecheck-enable t))
+  (setq-local ebed:flycheck-codecheck-enable t)
+
+  ;; Trigger codecheck run by forcing a new file save.
+  (set-buffer-modified-p t)
+  (save-buffer)
+  )
 
 (defun ebed:flycheck-codecheck-insert-rule ()
   (interactive)
