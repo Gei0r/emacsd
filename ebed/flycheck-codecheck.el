@@ -34,7 +34,8 @@ the file's .cpp/.c/.h suffix with .cck."
           (not (string-match "\\.cpp$\\|\\.h$\\|\\.c$" buffer-file-name)))
       nil    ; invalid source file (should not happen)
      ;else: current buffer holds a cpp, h or c file
-     (replace-regexp-in-string "\\.cpp$\\|\\.h$\\|\\.c$" ".cck" buffer-file-name)
+    (replace-regexp-in-string "\\.cpp$\\|\\.h$\\|\\.c$" ".cck"
+                              (file-name-nondirectory buffer-file-name))
      ))
 
 (defun ebed:codecheck-sentinel (process event flycheck-callback
