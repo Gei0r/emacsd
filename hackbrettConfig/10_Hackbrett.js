@@ -73,13 +73,15 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 "Hackbrett/_section/cu-boards/uecc/inspector/_src"]
         },
 
-        "Hackbrett/_section/cu-boards/uecc": {
-            root: "Hackbrett/_section/cu-boards/uecc",
+        "Hackbrett/_section/cu-boards/uecc/inspector": {
+            root: "Hackbrett/_section/cu-boards/uecc/inspector",
             incdirs: [
                 "Hackbrett/_section/cu-boards/uecc/_inc",
                 "Hackbrett/_section/cu-boards/uecc/inspector/_src",
                 "Hackbrett/_section/kernel32/_inc",
-            ]
+                "Hackbrett/_inc/test",
+            ],
+            flags: ["-DSLLREPLACER_NO_DS3"],
         },
 
         "Hackbrett/_section/comm/ECC-StdComm2/IEM": {
