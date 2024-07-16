@@ -77,6 +77,7 @@
   (let* ((entry (if id id (ebed:getBibIdAtPoint)))
          (result (ebed:call_getbibentryJs entry "--saplink")))
     (message result)
+    (kill-new result)
     (browse-url result)))
 
 (defun ebed:gotoBibentry (&optional id)
