@@ -139,6 +139,17 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 "Hackbrett/_inc/appl_ext",
             ],
         },
+        "Hackbrett/_section/comm_safety/devSLC": {
+            incdirs: [
+                "Hackbrett/_section/comm_safety/devSLC/_inc",
+                "Hackbrett/_section/comm_safety/devSLC/_FM_include",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Support",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Configuration",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Task",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Safety",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Transport",
+            ],
+        },
 
         "Hackbrett/_src/packager": {
             root: "Hackbrett/_src/packager",
