@@ -281,3 +281,9 @@
   (advice-add 'plantuml-update-preview-buffer
               :around #'plantuml-switch-back-after-preview)
   )
+
+(use-package lua-mode
+  :mode ("\\.lua$")
+  :config
+  (setq lua-indent-level 4)
+  )

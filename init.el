@@ -104,6 +104,7 @@
          (typescript-mode . ebed:progface)
          (python-mode . ebed:progface)
          (rustic-mode . ebed:progface)
+         (lua-mode . ebed:progface)
          ))
 
 (use-package helm
