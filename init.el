@@ -96,17 +96,6 @@
 (global-hl-line-mode)
 (show-paren-mode)
 
-(use-package ebed-progface :load-path "ebed"
-  :commands ebed:progface
-  :hook ((web-mode . ebed:progface)
-         (c-mode-common . ebed:progface)
-		 (emacs-lisp-mode . ebed:progface)
-         (typescript-mode . ebed:progface)
-         (python-mode . ebed:progface)
-         (rustic-mode . ebed:progface)
-         (lua-mode . ebed:progface)
-         ))
-
 (use-package helm
   :init
   
@@ -301,6 +290,17 @@
 (server-start)
 
 (load-file "~/.emacs.d/languages.el")
+
+(use-package ebed-progface :load-path "ebed"
+  :commands ebed:progface
+  :hook ((web-mode . ebed:progface)
+         (c-mode-common . ebed:progface)
+		 (emacs-lisp-mode . ebed:progface)
+         (typescript-mode . ebed:progface)
+         (python-mode . ebed:progface)
+         (rustic-mode . ebed:progface)
+         (lua-mode . ebed:progface)
+         ))
 
 (load-file "~/.emacs.d/mykeys.el")
 (when isSiemens (load-file "~/.emacs.d/cq/init-cq.el"))
