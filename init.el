@@ -47,7 +47,7 @@
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(6 ((shift) . 1) ((control) . 0.5)))
  '(package-selected-packages
-   '(stickyfunc-enhance powershell rustic crdt lsp-clangd which-key cmake-font-lock cmake-mode yaml-mode jump-char overlay cqtbl cq compilation-mode git-gutter+ git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package))
+   '(lua-mode plantuml-mode origami editorconfig stickyfunc-enhance powershell rustic crdt lsp-clangd which-key cmake-font-lock cmake-mode yaml-mode jump-char overlay cqtbl cq compilation-mode git-gutter+ git-gutter-fringe+ lsp-mode company ccls company-lsp lsp-ui tide typescript-mode flyspell-correct-helm yasnippet flycheck ace-window ace-jump-buffer avy multiple-cursors helm-swoop helm-ls-git helm comment-dwim-2 asm86-mode undo-tree magit web-mode ws-butler bm expand-region counsel ivy idle-highlight-mode fill-column-indicator use-package))
  '(sentence-end-double-space nil)
  '(tab-width 4)
  '(tool-bar-mode nil)
@@ -57,19 +57,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bm-fringe-face ((t (:background "deep sky blue" :foreground "White"))))
+ '(bm-fringe-face ((t (:background "deep sky blue" :foreground "White"))) t)
  '(ccls-skipped-range-face ((t nil)))
  '(column-marker-1 ((t (:background "#782121"))))
  '(company-tooltip ((t (:background "#fce94f" :foreground "black"))))
  '(cqtbl-highlight ((t (:inherit highlight :background "saddle brown"))))
  '(highlight ((t (:background "dark slate blue" :foreground "ivory"))))
  '(hl-line ((t (:background "dark slate gray"))))
- '(idle-highlight ((t (:background "MediumPurple4"))))
- '(tv-channel1 ((t (:background "#aa8800"))))
- '(tv-channel2 ((t (:background "#800000"))))
- '(tv-channel3 ((t (:background "#002255"))))
- '(tv-test-positive ((t (:background "forest green"))))
- '(tv-test-start ((t (:background "yellow3" :foreground "#483737")))))
+ '(idle-highlight ((t (:background "MediumPurple4"))) t)
+ '(tv-channel1 ((t (:background "#aa8800"))) t)
+ '(tv-channel2 ((t (:background "#800000"))) t)
+ '(tv-channel3 ((t (:background "#002255"))) t)
+ '(tv-test-positive ((t (:background "forest green"))) t)
+ '(tv-test-start ((t (:background "yellow3" :foreground "#483737"))) t))
 
 (if (eq system-type 'windows-nt)
     (face-spec-set 'default '((t :height 140 :family "Courier New")))
