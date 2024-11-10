@@ -34,7 +34,8 @@ the file's .cpp/.c/.h suffix with .cck."
           (not (string-match "\\.cpp$\\|\\.h$\\|\\.c$" buffer-file-name)))
       nil    ; invalid source file (should not happen)
      ;else: current buffer holds a cpp, h or c file
-     (replace-regexp-in-string "\\.cpp$\\|\\.h$\\|\\.c$" ".cck" buffer-file-name)
+    (replace-regexp-in-string "\\.cpp$\\|\\.h$\\|\\.c$" ".cck"
+                              (file-name-nondirectory buffer-file-name))
      ))
 
 (defun ebed:codecheck-sentinel (process event flycheck-callback
@@ -185,7 +186,7 @@ Asynchronously runs 'xp codecheck $filename.cck' in the directory
     ebed:compile-dir (should be set to the appropriate _make subdir) and parses
     the output."
   :start 'ebed:codecheck-start
-  :enabled (lambda () (and (boundp 'ebed:flycheck-codecheck-enable)
+  :predicate (lambda () (and (boundp 'ebed:flycheck-codecheck-enable)
                            ebed:flycheck-codecheck-enable))
   :modes '(c-mode c++-mode))
 
@@ -196,7 +197,12 @@ Asynchronously runs 'xp codecheck $filename.cck' in the directory
 
 (defun ebed:flycheck-codecheck-enable-in-this-buffer ()
   (interactive)
-  (setq-local ebed:flycheck-codecheck-enable t))
+  (setq-local ebed:flycheck-codecheck-enable t)
+
+  ;; Trigger codecheck run by forcing a new file save.
+  (set-buffer-modified-p t)
+  (save-buffer)
+  )
 
 (defun ebed:flycheck-codecheck-insert-rule ()
   (interactive)

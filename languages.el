@@ -28,7 +28,7 @@
   (add-hook 'org-mode-hook
             (lambda ()
               (highlight-lines-matching-regexp
-               "<todo " 'hi-docbuilder-todo))))
+               "<todo" 'hi-docbuilder-todo))))
 
 (flycheck-define-checker docbuilder
   "Syntax checker for DocBuilder files"
@@ -147,9 +147,10 @@
   (setq lsp-headerline-breadcrumb-enable nil)
   (when (fboundp 'idle-highlight-mode) (idle-highlight-mode -1))
 
+  (require 'lsp-clangd)
+  (add-to-list 'lsp-clients-clangd-args "--header-insertion=never")
 
   ;; To enable verbose logging in buffer *clangd-stderr*:
-  ;; (require 'lsp-clangd)
   ;; (add-to-list 'lsp-clients-clangd-args "-log=verbose")
 
   :bind
@@ -279,4 +280,10 @@
   (add-to-list 'plantuml-jar-args "-tpng" t)
   (advice-add 'plantuml-update-preview-buffer
               :around #'plantuml-switch-back-after-preview)
+  )
+
+(use-package lua-mode
+  :mode ("\\.lua$")
+  :config
+  (setq lua-indent-level 4)
   )

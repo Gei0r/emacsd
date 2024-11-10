@@ -73,6 +73,30 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
                 "Hackbrett/_section/cu-boards/uecc/inspector/_src"]
         },
 
+        "Hackbrett/_section/cu-boards/uecc/inspector": {
+            root: "Hackbrett/_section/cu-boards/uecc/inspector",
+            incdirs: [
+                "Hackbrett/_section/cu-boards/uecc/_inc",
+                "Hackbrett/_section/cu-boards/uecc/inspector/_src",
+                "Hackbrett/_section/kernel32/_inc",
+                "Hackbrett/_inc/test",
+            ],
+            flags: ["-DSLLREPLACER_NO_DS3"],
+        },
+
+        "Hackbrett/_section/comm/ECC-StdComm2/IEM": {
+            incdirs: [
+                "Hackbrett/_section/comm/ECC-StdComm/StdCommTest/_inc",
+                "Hackbrett/_section/comm/Streams/_inc",
+                "Hackbrett/_section/comm/genlib/_inc",
+                "Hackbrett/_section/comm/LTSA/_inc",
+                "Hackbrett/_section/comm/ECC-StdComm/Ethernet-M-Modul",
+                "Hackbrett/_section/comm/ECC-StdComm/serielles-M-Modul/_inc",
+                "Hackbrett/_section/comm/ECC-StdComm/Ethernet-M-Modul/_test_src",
+            ],
+            flags: ["-DCPM32_USE_CLIB"],
+        },
+
         "Hackbrett/_section/Demo": {
             incdirs: ["Hackbrett/_section/comm/Streams/_inc"]
         },
@@ -108,6 +132,23 @@ exports.getPlugin = function(locateDominatingFile, getFilesInDirRecursive) {
 
         "Hackbrett/_section/devices/file": {
             defines: { "THROW_NOTHING": "throw" }
+        },
+
+        "Hackbrett/_section/SMI_Generic": {
+            incdirs: [
+                "Hackbrett/_inc/appl_ext",
+            ],
+        },
+        "Hackbrett/_section/comm_safety/devSLC": {
+            incdirs: [
+                "Hackbrett/_section/comm_safety/devSLC/_inc",
+                "Hackbrett/_section/comm_safety/devSLC/_FM_include",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Support",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Configuration",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Task",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Safety",
+                "Hackbrett/_section/comm_safety/devSLC/_src/Transport",
+            ],
         },
 
         "Hackbrett/_src/packager": {
