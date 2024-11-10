@@ -255,6 +255,7 @@
   )
 
 (use-package git-gutter+
+  :quelpa (git-gutter+ :fetcher github :repo "gei0r/git-gutter-plus")
   :config
   ;; (global-git-gutter+-mode)
   (set-face-foreground 'git-gutter+-added "#008000")
