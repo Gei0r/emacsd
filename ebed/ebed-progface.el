@@ -25,9 +25,6 @@
 
 ;;; Code:
 
-(use-package idle-highlight-mode
-  :custom-face (idle-highlight ((t (:background "MediumPurple4")))))
-
 (use-package git-gutter+ :commands git-gutter+-mode)
 
 ;; Use monospaced font faces in current buffer

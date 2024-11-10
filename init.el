@@ -294,6 +294,10 @@
 
 (load-file "~/.emacs.d/languages.el")
 
+(use-package idle-highlight-mode
+  :commands idle-highlight-mode
+  :custom-face (idle-highlight ((t (:background "MediumPurple4")))))
+
 (use-package ebed-progface :load-path "ebed"
   :commands ebed:progface
   :hook ((web-mode . ebed:progface)
