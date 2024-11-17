@@ -109,24 +109,17 @@
                                            (newline-and-indent)))))))
 
 (use-package typescript-mode
-  :mode("\\.ts" "\\.tsx" "\\.js$" "\\.mjs$"))
-
-(use-package tide
-  :hook
-  (typescript-mode .
-    (lambda()
-      (tide-setup)
-      (flycheck-mode +1)
-      (setq flycheck-check-syntax-automatically '(save mode-enabled))
-      (eldoc-mode +1)
-      (tide-hl-identifier-mode +1)
-      (company-mode +1)))
-  :config
-  (setq company-tooltip-align-annotations t)
-  (add-hook 'before-save-hook 'tide-format-before-save)
-  :bind
-  ((:map tide-mode-map (("<f2>" . tide-jump-to-definition)
-                        ("M-<left>" . tide-jump-back)))))
+  :mode("\\.ts" "\\.tsx" "\\.js$" "\\.mjs$")
+  :hook ((typescript-mode) .
+         (lambda ()
+           ;; When there's a deno.json file, use deno's built-in lsp server
+           ;; instead of typescript-language-server.
+           ;; This mirrors deno lsp's behavior.
+           (when (locate-dominating-file buffer-file-name "deno.json")
+             (setq-local lsp-enabled-clients '(deno-ls)))
+           (lsp)
+           (add-hook 'before-save-hook 'lsp-format-buffer 0 t)
+           )))
 
 (use-package bibtex
   :config
