@@ -181,7 +181,11 @@
   :config (setq bm-highlight-style 'bm-highlight-only-fringe)
   :custom-face (bm-fringe-face ((t (:background "deep sky blue" :foreground "White")))))
 
-(use-package ws-butler :config (ws-butler-global-mode))
+(use-package ws-butler
+  ;; next line needed until PR is merged:
+  ;; https://github.com/lewang/ws-butler/pull/54
+  :quelpa (ws-butler :fetcher github :repo "ktfleming/ws-butler" :branch "fix")
+  :config (ws-butler-global-mode))
 
 (use-package ebed-helpers :load-path "ebed"
   :commands ebed:revert-buffer-without-prompt)
